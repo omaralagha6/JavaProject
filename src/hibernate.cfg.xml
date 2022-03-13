@@ -5,13 +5,15 @@
 <hibernate-configuration>
 
 <session-factory>
-<property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-<property name="connection.url">jdbc:sqlserver://localhost:1433;databaseName=INFO404;integratedSecurity=true</property>
+<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+<property name="connection.url">jdbc:mysql://localhost:3308/INFO404</property>
 <property name="connection.pool_size">1</property>
-<property name="dialect">org.hibernate.dialect.SQLServer2012Dialect</property>
+<property name="connection.username">root</property>
+<property name="connection.password">1234</property>
+<property name="dialect">org.hibernate.dialect.MySQL55Dialect</property>
 <property name="show_sql">true</property>
 <property name="current_session_context_class">thread</property>
-<property name="hbm2ddl.auto">update</property>
+<property name="hbm2ddl.auto">create</property>
 <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property> 
 
 <mapping resource="Employee.hbm.xml" />
