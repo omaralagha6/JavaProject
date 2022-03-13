@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SearchController">
+	<children>
+		<HBox alignment="CENTER_LEFT" prefHeight="120.0" spacing="10.0">
+			<children>
+				<TextField fx:id="bookID" onAction="#searchAction" prefHeight="40.0" prefWidth="200.0" promptText="Enter Book ID">
+					<HBox.margin>
+						<Insets />
+					</HBox.margin>
+				</TextField>
+				<VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+					<children>
+						<Text fx:id="bookTitleTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Book Title">
+							<VBox.margin>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</VBox.margin>
+							<font>
+								<Font size="16.0" />
+							</font>
+						</Text>
+						<Text fx:id="authorTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Author">
+							<VBox.margin>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</VBox.margin>
+							<font>
+								<Font size="16.0" />
+							</font>
+						</Text>
+						<Text fx:id="statusTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Status">
+							<font>
+								<Font size="16.0" />
+							</font>
+							<VBox.margin>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</VBox.margin>
+						</Text>
+					</children>
+					<padding>
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+					</padding>
+				</VBox>
+				<VBox fx:id="bookEditDelete" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="180.0">
+					<padding>
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+					</padding>
+					<children>
+						<JFXButton fx:id="editBook" onAction="#bookEditDeleteAction" prefWidth="60.0" ripplerFill="#12d900d4" text="Edit" textAlignment="CENTER" textFill="#00c90d" underline="true">
+							<cursor>
+								<Cursor fx:constant="HAND" />
+							</cursor>
+							<font>
+								<Font size="14.0" />
+							</font>
+						</JFXButton>
+						<JFXButton fx:id="deleteBook" onAction="#bookEditDeleteAction" prefWidth="60.0" ripplerFill="#d90000d4" text="Delete" textFill="#c90000" underline="true">
+							<cursor>
+								<Cursor fx:constant="HAND" />
+							</cursor>
+							<font>
+								<Font size="14.0" />
+							</font>
+						</JFXButton>
+					</children>
+				</VBox>
+			</children>
+			<VBox.margin>
+				<Insets />
+			</VBox.margin>
+			<padding>
+				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+			</padding>
+		</HBox>
+		<HBox alignment="CENTER_LEFT" prefHeight="120.0" spacing="10.0">
+			<children>
+				<TextField fx:id="employeeID" onAction="#searchAction" prefHeight="40.0" prefWidth="200.0" promptText="Enter Employee ID">
+					<HBox.margin>
+						<Insets />
+					</HBox.margin>
+				</TextField>
+				<VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+					<children>
+						<Text fx:id="empIDTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID">
+							<VBox.margin>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</VBox.margin>
+							<font>
+								<Font size="16.0" />
+							</font>
+						</Text>
+						<Text fx:id="empNameTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+							<VBox.margin>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</VBox.margin>
+							<font>
+								<Font size="16.0" />
+							</font>
+						</Text>
+						<Text fx:id="empNbrTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number">
+							<font>
+								<Font size="16.0" />
+							</font>
+							<VBox.margin>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</VBox.margin>
+						</Text>
+					</children>
+					<padding>
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+					</padding>
+				</VBox>
+				<VBox fx:id="empEditDelete" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="180.0">
+					<padding>
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+					</padding>
+					<children>
+						<JFXButton fx:id="editEmployee" onAction="#employeeEditDeleteAction" prefWidth="60.0" ripplerFill="#12d900d4" text="Edit" textAlignment="CENTER" textFill="#00c90d" underline="true">
+							<cursor>
+								<Cursor fx:constant="HAND" />
+							</cursor>
+							<font>
+								<Font size="14.0" />
+							</font>
+						</JFXButton>
+						<JFXButton fx:id="deleteEmployee" onAction="#employeeEditDeleteAction" prefWidth="60.0" ripplerFill="#d90000d4" text="Delete" textFill="#c90000" underline="true">
+							<cursor>
+								<Cursor fx:constant="HAND" />
+							</cursor>
+							<font>
+								<Font size="14.0" />
+							</font>
+						</JFXButton>
+					</children>
+				</VBox>
+			</children>
+			<VBox.margin>
+				<Insets />
+			</VBox.margin>
+			<padding>
+				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+			</padding>
+		</HBox>
+		<HBox alignment="CENTER_LEFT" prefHeight="120.0" spacing="10.0">
+			<children>
+				<TextField fx:id="memberID" onAction="#searchAction" prefHeight="40.0" prefWidth="200.0" promptText="Enter Member ID">
+					<HBox.margin>
+						<Insets />
+					</HBox.margin>
+				</TextField>
+				<VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+					<children>
+						<Text fx:id="memberIDTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Member ID">
+							<VBox.margin>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</VBox.margin>
+							<font>
+								<Font size="16.0" />
+							</font>
+						</Text>
+						<Text fx:id="memberNameTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Name">
+							<VBox.margin>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</VBox.margin>
+							<font>
+								<Font size="16.0" />
+							</font>
+						</Text>
+						<Text fx:id="memberNbrTXT" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number">
+							<font>
+								<Font size="16.0" />
+							</font>
+							<VBox.margin>
+								<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+							</VBox.margin>
+						</Text>
+					</children>
+					<padding>
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+					</padding>
+				</VBox>
+				<VBox fx:id="memberEdit" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="180.0">
+					<padding>
+						<Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+					</padding>
+					<children>
+						<JFXButton fx:id="editMember" onAction="#memberEditAction" prefWidth="60.0" ripplerFill="#12d900d4" text="Edit" textAlignment="CENTER" textFill="#00c90d" underline="true">
+							<cursor>
+								<Cursor fx:constant="HAND" />
+							</cursor>
+							<font>
+								<Font size="14.0" />
+							</font>
+						</JFXButton>
+					</children>
+				</VBox>
+			</children>
+			<padding>
+				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+			</padding>
+		</HBox>
+	</children>
+</VBox>
