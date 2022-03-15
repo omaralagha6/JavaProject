@@ -1,50 +1,68 @@
 package Model;
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
+public abstract class Book {
 
-public class Book {
-	private SimpleStringProperty title, id, author, publisher;
-	private SimpleBooleanProperty available;
+	protected String isbn, bookAuthor,bookName,publisher;
+
+
+	protected int period;
 	
-	public Book(String title, String id, String author, String publisher, Boolean available) {
-		this.title = new SimpleStringProperty(title);
-		this.id = new SimpleStringProperty(id);
-		this.author = new SimpleStringProperty(author);
-		this.publisher = new SimpleStringProperty(publisher);
-		this.available = new SimpleBooleanProperty(available);
+
+	public Book(String isbn, String bookAuthor, String bookName, String publisher) {
+		
+		this.isbn = isbn;
+		this.bookAuthor = bookAuthor;
+		this.bookName = bookName;
+		this.publisher = publisher;
 	}
-	
-	public String getTitle() {
-		return this.title.get();
+
+	public Book() {
+		
 	}
-	public String getID() {
-		return this.id.get();
+
+	public int getPeriod() {
+		return period;
 	}
-	public String getAuthor() {
-		return this.author.get();
+
+	public void setPeriod(int period) {
+		this.period = period;
 	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public String getBookAuthor() {
+		return bookAuthor;
+	}
+
+	public void setBookAuthor(String bookAuthor) {
+		this.bookAuthor = bookAuthor;
+	}
+
+	public String getBookName() {
+		return bookName;
+	}
+
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+
 	public String getPublisher() {
-		return this.publisher.get();
+		return publisher;
 	}
-	public Boolean getAvailable() {
-		return this.available.get();
-	}
-	
-	
-	public void setTitle(String title) {
-		this.title.set(title);
-	}
-	public void setID(String ID) {
-		this.id.set(ID);
-	}
-	public void setAuthor(String author) {
-		this.author.set(author);
-	}
+
 	public void setPublisher(String publisher) {
-		this.publisher.set(publisher);
+		this.publisher = publisher;
 	}
-	public void setAvailable(Boolean available) {
-		this.available.set(available);
-	}
+	
+	
+	
+	
+	
+	
 }

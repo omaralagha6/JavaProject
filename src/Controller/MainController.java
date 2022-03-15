@@ -9,7 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.effects.JFXDepthManager;
 
 import Model.AlertMaker;
-import Model.Book;
+import Model.BookTable;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.*;
@@ -32,7 +32,7 @@ public class MainController implements Initializable {
 	@FXML
 	private HBox bookInfo, memberInfo;
 	@FXML
-	private ListView<Book> books;
+	private ListView<BookTable> books;
 	@FXML
 	private BorderPane mainPane;
 	@FXML
