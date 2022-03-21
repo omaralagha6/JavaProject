@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXPasswordField;
+
 import Model.AlertMaker;
 import Model.Preferences;
 import javafx.event.ActionEvent;
@@ -20,7 +22,7 @@ public class SettingsController implements Initializable {
 	@FXML
 	private TextField nbrOfDays, finePerDay, username;
 	@FXML
-	private PasswordField password, empPassword;
+	private JFXPasswordField password, empPassword;
 	@FXML
 	private Button saveBtn, cancelBtn;
 	@FXML

@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
@@ -30,7 +31,7 @@ public class LoginController implements Initializable {
 	@FXML
 	private JFXTextField username,viewPass;
 	@FXML
-	private Button loginBtn;
+	private JFXButton loginBtn;
 	@FXML
     private JFXPasswordField  hidenPass;
 
@@ -66,7 +67,9 @@ public class LoginController implements Initializable {
 						e.printStackTrace();
 					}
 				} else {
-					AlertMaker.showWarningAlert("Attention", "Invalid username or password");
+					//AlertMaker.showWarningAlert("Attention", "Invalid username or password");
+					username.getStyleClass().add("wrong-credentials");
+					hidenPass.getStyleClass().add("wrong-credentials");
 				}
 			} else {
 				admin = false;
@@ -85,7 +88,9 @@ public class LoginController implements Initializable {
 						e.printStackTrace();
 					}
 				} else {
-					AlertMaker.showWarningAlert("Attention", "Invalid username or password");
+					//AlertMaker.showWarningAlert("Attention", "Invalid username or password");
+					username.getStyleClass().add("wrong-credentials");
+					hidenPass.getStyleClass().add("wrong-credentials");
 				}
 			}
 		}

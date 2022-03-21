@@ -6,29 +6,37 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDrawer;
+import com.jfoenix.controls.JFXHamburger;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.effects.JFXDepthManager;
+import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 
 import Model.AlertMaker;
 import Model.Book;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.*;
 
 public class MainController implements Initializable {
 
 	@FXML
-	private TextField searchBookID, searchMemberID, bookID;
+	private JFXTextField searchBookID, searchMemberID, bookID;
 	@FXML
 	private Text bookTitleTXT, authorTXT, memberNameTXT, contactTXT, statusTXT;
 	@FXML
-	private JFXButton addMemberBtn, addBookBtn, viewMembersBtn, viewBooksBtn, settingsBtn;
-	@FXML
-	private Button renewBtn, submissionBtn, issueBtn;
+	private JFXButton addMemberBtn, addBookBtn, viewMembersBtn, viewBooksBtn, settingsBtn, renewBtn, submissionBtn, issueBtn;
 	@FXML
 	private HBox bookInfo, memberInfo;
 	@FXML
@@ -37,11 +45,41 @@ public class MainController implements Initializable {
 	private BorderPane mainPane;
 	@FXML
 	private MenuItem logoutMenuItem, closeMenuItem, membersMenuItem, booksMenuItem, employeesMenuItem;
+	@FXML
+	private JFXDrawer drawer;
+	@FXML
+	private JFXHamburger hamburger;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		JFXDepthManager.setDepth(bookInfo, 1);
 		JFXDepthManager.setDepth(memberInfo, 1);
+		
+		initDrawer();
+	}
+
+	private void initDrawer() {
+		try {
+			VBox toolbar = FXMLLoader.load(getClass().getResource("/View/Toolbar.fxml"));
+			drawer.setSidePane(toolbar);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		HamburgerSlideCloseTransition task = new HamburgerSlideCloseTransition(hamburger);
+		task.setRate(-1);
+		hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (Event event) -> {
+			
+			task.setRate(task.getRate() * -1);
+			task.play();
+			if (drawer.isClosed())
+			{
+				drawer.open();
+			}
+			else
+			{
+				drawer.close();
+			}
+		});
 	}
 
 	@FXML
