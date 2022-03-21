@@ -1,15 +1,22 @@
 package Model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Book")
 public abstract class Book {
 
-	protected String isbn, bookAuthor,bookName,publisher;
-
-
+	@Id
+	protected String isbn;
+	protected String bookAuthor;
+	protected String bookName;
+	protected String publisher;
 	protected int period;
-	
 
 	public Book(String isbn, String bookAuthor, String bookName, String publisher) {
-		
+
 		this.isbn = isbn;
 		this.bookAuthor = bookAuthor;
 		this.bookName = bookName;
@@ -17,7 +24,7 @@ public abstract class Book {
 	}
 
 	public Book() {
-		
+
 	}
 
 	public int getPeriod() {
@@ -59,10 +66,5 @@ public abstract class Book {
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-	
-	
-	
-	
-	
-	
+
 }

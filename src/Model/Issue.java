@@ -3,21 +3,39 @@ package Model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Issue")
 public class Issue {
 
-	protected Book book;
-	protected Employee employee;
-	protected Member member;
-	protected String issueDate;
-	protected String isbn;
+	@Id
+	protected int id;
 	
-	public String getisbn()
-	{
-		return  this.getBook().getIsbn();
+	public int getId() {
+		return id;
 	}
-	public void setisbn(String isbn)
-	{this.getBook().setIsbn(isbn);
+
+	public void setId(int id) {
+		this.id = id;
 	}
+
+	@OneToOne
+	protected Book book;
+	@ManyToOne
+	protected Employee employee;
+	@ManyToOne
+	protected Member member;
+	
+	@Column(name="IssueDate")
+	protected String issueDate;
+	
+
 
 
 	public String getIssueDate() {

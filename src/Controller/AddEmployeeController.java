@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTooltip;
 
-import Database.EmployeeDao;
+//import Database.EmployeeDao;
 import Model.AlertMaker;
 import Model.Employee;
 import Model.Main;
@@ -51,7 +51,7 @@ public class AddEmployeeController implements Initializable {
 
 						Person p = new Employee(employeeID.getText(), empName.getText(), phoneNbr.getText(),
 								email.getText(), password.getText());
-						Main.empDAO.add(p);
+//						Main.empDAO.add(p);
 						Stage stage = (Stage) saveBtn.getScene().getWindow();
 						stage.close();
 					}

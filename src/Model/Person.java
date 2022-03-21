@@ -1,19 +1,27 @@
 package Model;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
-
-
+@MappedSuperclass
 public abstract class Person {
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName()+" name=" + name + ", phoneNbr=" + phoneNbr + ", email=" + email + ", id=" + id ;
+		return this.getClass().getSimpleName() + " name=" + name + ", phoneNbr=" + phoneNbr + ", email=" + email
+				+ ", id=" + id;
 	}
 
-	protected String name, phoneNbr, email, id;
-	
-	
-
+	@Column(name = "Name")
+	protected String name;
+	@Column(name = "PhoneNumber")
+	protected String phoneNbr;
+	@Column(name = "Email")
+	protected String email;
+	@Id
+	@Column(name = "Id")
+	protected String id;
 
 	public String getName() {
 		return name;
