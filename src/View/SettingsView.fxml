@@ -18,26 +18,56 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXTextField fx:id="employeeID" labelFloat="true" prefHeight="40.0" promptText="Employee ID">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXTextField fx:id="phoneNbr" labelFloat="true" prefHeight="40.0" promptText="Phone Number">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXTextField fx:id="email" labelFloat="true" prefHeight="40.0" promptText="Email">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXPasswordField fx:id="empPassword" labelFloat="true" prefHeight="40.0" promptText="Change Password">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXPasswordField>
          </children>
          <padding>

@@ -17,26 +17,56 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXTextField fx:id="memberID" labelFloat="true" prefHeight="50.0" promptText="Member ID">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXTextField fx:id="phoneNbr" labelFloat="true" prefHeight="50.0" promptText="Phone Number">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXTextField fx:id="email" labelFloat="true" prefHeight="50.0" promptText="Email">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXTextField fx:id="address" labelFloat="true" prefHeight="50.0" promptText="Address">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
          </children>
          <padding>

@@ -18,21 +18,45 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXTextField fx:id="finePerDay" labelFloat="true" prefHeight="50.0" promptText="Fine per day">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXTextField fx:id="username" labelFloat="true" prefHeight="50.0" promptText="User Name">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXPasswordField fx:id="password" labelFloat="true" prefHeight="50.0" promptText="Change Password">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXPasswordField>
          </children>
          <padding>

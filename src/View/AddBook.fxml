@@ -11,22 +11,40 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../Styles/darktheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddBookController">
    <children>
-      <VBox alignment="CENTER" prefWidth="600.0" spacing="20.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="40.0" layoutY="40.0" prefHeight="304.0" prefWidth="560.0" spacing="20.0" AnchorPane.bottomAnchor="76.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
             <JFXTextField fx:id="bookTitle" labelFloat="true" prefHeight="50.0" promptText="Book Title">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXTextField fx:id="bookID" labelFloat="true" prefHeight="50.0" promptText="Book ID">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
             <JFXTextField fx:id="bookAuthor" labelFloat="true" prefHeight="50.0" promptText="Book Author">
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </JFXTextField>
       		<JFXTextField fx:id="publisher" labelFloat="true" prefHeight="50.0" promptText="Publisher">
       			<font>
@@ -36,8 +54,11 @@
       				<Insets />
       			</opaqueInsets>
       			<VBox.margin>
-      				<Insets />
+      				<Insets top="10.0" />
       			</VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
       		</JFXTextField>
          </children>
          <padding>
