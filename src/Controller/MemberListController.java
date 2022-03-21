@@ -23,6 +23,7 @@ public class MemberListController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 		idColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
 		phoneNbrColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNbr"));
