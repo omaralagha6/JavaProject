@@ -46,8 +46,6 @@ public class ToolbarController {
 			stage.setScene(new Scene(parent));
 			stage.setMinHeight(440);
 			stage.setMinWidth(615);
-			if (event.getSource().equals(viewBooksBtn) || event.getSource().equals(viewMembersBtn))
-				stage.setMaximized(true);
 			stage.show();
 		} catch (IOException e) {
 			AlertMaker.showErrorAlert("Opps",

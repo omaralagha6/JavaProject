@@ -233,9 +233,9 @@ public class MainController implements Initializable {
 	public ObservableList<PieChart.Data> getMemberStats() {
 		ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
 		int members = 0;
-		//get number of books from DB
+		//get number of members from DB
 		data.add(new PieChart.Data("Total Members (" + members + ")", members));
-		//get number of issued books from DB
+		//get number of members with books from DB
 		data.add(new PieChart.Data("Members With Books (" + members + ")", members));
 		
 		return data;

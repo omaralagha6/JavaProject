@@ -36,15 +36,14 @@ public class MemberListController implements Initializable {
     }
 
     @FXML
-    void handleBookDelete(ActionEvent event) {
+    void handleMemberDelete(ActionEvent event) {
         Optional<ButtonType> response = AlertMaker.showConfigurationAlert("", "Proceed ? ");
         if (response.get().equals(ButtonType.OK)) {
 
             AlertMaker.showInformationAlert("Delete Member", "Member deleted successfully");
             MemberTable temp = tableView.getSelectionModel().getSelectedItem();
             Main.memDAO.delete(temp.getID());
-			tableView.getItems().clear();
-			fillTable();
+            tableView.getItems().remove(temp);
 
         }
     }
