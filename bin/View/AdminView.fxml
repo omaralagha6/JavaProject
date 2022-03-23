@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../Styles/main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="742.0" stylesheets="@../Styles/darktheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminController">
    <center>
       <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
         <tabs>
@@ -30,7 +30,7 @@
    <right>
       <VBox alignment="TOP_CENTER" prefWidth="150.0">
          <children>
-            <JFXButton fx:id="addEmpBtn" alignment="CENTER" contentDisplay="TOP" onAction="#addingAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" text="Add Employee" textAlignment="CENTER">
+            <JFXButton fx:id="addEmpBtn" alignment="CENTER" contentDisplay="TOP" onAction="#addingAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="toolbar-button" text="Add Employee" textAlignment="CENTER">
                <graphic>
                   <ImageView fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -42,7 +42,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="addBookBtn" alignment="CENTER" contentDisplay="TOP" onAction="#addingAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" text="Add Book">
+            <JFXButton fx:id="addBookBtn" alignment="CENTER" contentDisplay="TOP" onAction="#addingAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="toolbar-button" text="Add Book">
                <graphic>
                   <ImageView fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -54,7 +54,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="searchBtn" alignment="CENTER" contentDisplay="TOP" onAction="#searchAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" text="Search">
+            <JFXButton fx:id="searchBtn" alignment="CENTER" contentDisplay="TOP" onAction="#searchAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="toolbar-button" text="Search">
                <graphic>
                   <ImageView fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -66,7 +66,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="settingsBtn" alignment="CENTER" contentDisplay="TOP" onAction="#settingsAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" text="Settings">
+            <JFXButton fx:id="settingsBtn" alignment="CENTER" contentDisplay="TOP" onAction="#settingsAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="toolbar-button" text="Settings">
                <graphic>
                   <ImageView fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -78,7 +78,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="logoutBtn" alignment="CENTER" contentDisplay="TOP" onAction="#logoutAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" text="Logout">
+            <JFXButton fx:id="logoutBtn" alignment="CENTER" contentDisplay="TOP" onAction="#logoutAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="toolbar-button" text="Logout">
                <graphic>
                   <ImageView fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>

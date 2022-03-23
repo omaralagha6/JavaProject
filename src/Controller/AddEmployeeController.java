@@ -49,9 +49,9 @@ public class AddEmployeeController implements Initializable {
 					if (response.get().equals(ButtonType.OK)) {
 						AlertMaker.showInformationAlert("Save Member", "Employee added successfully to your list");
 
-						Person p = new Employee(employeeID.getText(), empName.getText(), phoneNbr.getText(),
+						Employee p = new Employee(employeeID.getText(), empName.getText(), phoneNbr.getText(),
 								email.getText(), password.getText());
-//						Main.empDAO.add(p);
+						Main.empDAO.add(p);
 						Stage stage = (Stage) saveBtn.getScene().getWindow();
 						stage.close();
 					}
@@ -77,7 +77,7 @@ public class AddEmployeeController implements Initializable {
 
 	@FXML
 	void generatePassword(ActionEvent event) {
-				password.setText(employeeID.getText() + "@" + phoneNbr.getText().hashCode());
+				password.setText(employeeID.getText() + "_" + phoneNbr.getText().hashCode());
 	}
 
 	@Override

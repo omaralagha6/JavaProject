@@ -10,7 +10,7 @@ import org.hibernate.SessionFactory;
 import Model.Employee;
 import Model.Person;
 
-public class MemberDao implements Dao{
+public class MemberDao{
 
 	
 	private SessionFactory factory;
@@ -19,48 +19,59 @@ public class MemberDao implements Dao{
 		factory =DbConnection.getSession();
 	}
 
-	public void add(Person person) {
+	public void add(Model.Member person) {
 		Session session =factory.getCurrentSession();
 		session.beginTransaction();
 
 		// save the object
-		System.out.println("Saving Student ...");
+		System.out.println("Saving Member ...");
 		System.out.println(person);
-		session.save((Member)person);
+		session.save(person);
 		// commit the transaction
 		session.getTransaction().commit();
 		System.out.println("Done !...");
 	}
 	
 	
-	public Person get(String id)
+	public Model.Member get(String id)
+	{
+		Session session=factory.getCurrentSession();
+		session.beginTransaction();
+		//retrieve student based on id : primary key
+		System.out.println("Getting member with id "+id);
+		Model.Member mem= session.get(Model.Member.class,id);
+		System.out.println("Get Complete "+mem);
+		session.getTransaction().commit();
+		return mem;
+	}
+	public Model.Member getPerson(String id,String phonenumber)
 	{
 		Session session=factory.getCurrentSession();
 		session.beginTransaction();
 		//retrieve student based on id : primary key
 		System.out.println("Getting student with id "+id);
-		Person mem= (Person) session.get(Member.class,id);
-		System.out.println("Get Complete "+mem);
+		Model.Member emp=(Model.Member) session.createQuery("from Member where Id = "+id+" and PhoneNumber = "+phonenumber);
+		System.out.println("Get Complete "+emp);
 		session.getTransaction().commit();
-		return mem;
+		return emp;
 	}
 	
 	
-	public List<Person>getAll() {
+	public List<Model.Member>getAll() {
 		Session session=factory.getCurrentSession();
 		session.beginTransaction();
-		List<Person> members=session.createQuery("from Member").list();
+		List<Model.Member> members=session.createQuery("from Member").list();
 		session.getTransaction().commit();
 		
 		return members;
 	}
 	
-	public void update(Person e)
+	public void update(Model.Member e)
 	{
 		Session session=factory.getCurrentSession();
 		session.beginTransaction();
-		Hibernate.initialize((Member)e);
-		session.update((Member)e);
+		Hibernate.initialize(e);
+		session.update(e);
 		session.getTransaction().commit();
 		
 	}
@@ -68,11 +79,14 @@ public class MemberDao implements Dao{
 	public void delete(String id)
 	{
 		Session session = factory.getCurrentSession();
-		Member p = (Member) session.load(Member.class, id);
+		session.beginTransaction();
+		Model.Member p = (Model.Member) session.load(Model.Member.class, id);
 		if (null != p) {
 			session.delete(p);
 		}
+		session.getTransaction().commit();
 	}
-	
-	
+
+
+
 }

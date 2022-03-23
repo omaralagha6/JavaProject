@@ -1,43 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../Styles/common.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddMemberController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../Styles/darktheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddMemberController">
    <children>
       <VBox alignment="CENTER" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TextField fx:id="name" prefHeight="50.0" promptText="Full Name">
+            <JFXTextField fx:id="name" labelFloat="true" prefHeight="50.0" promptText="Full Name">
                <font>
                   <Font size="16.0" />
                </font>
-            </TextField>
-            <TextField fx:id="memberID" prefHeight="50.0" promptText="Member ID">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </JFXTextField>
+            <JFXTextField fx:id="memberID" labelFloat="true" prefHeight="50.0" promptText="Member ID">
                <font>
                   <Font size="16.0" />
                </font>
-            </TextField>
-            <TextField fx:id="phoneNbr" prefHeight="50.0" promptText="Phone Number">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </JFXTextField>
+            <JFXTextField fx:id="phoneNbr" labelFloat="true" prefHeight="50.0" promptText="Phone Number">
                <font>
                   <Font size="16.0" />
                </font>
-            </TextField>
-            <TextField fx:id="email" prefHeight="50.0" promptText="Email">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </JFXTextField>
+            <JFXTextField fx:id="email" labelFloat="true" prefHeight="50.0" promptText="Email">
                <font>
                   <Font size="16.0" />
                </font>
-            </TextField>
-            <TextField fx:id="address" prefHeight="50.0" promptText="Address">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </JFXTextField>
+            <JFXTextField fx:id="address" labelFloat="true" prefHeight="50.0" promptText="Address">
                <font>
                   <Font size="16.0" />
                </font>
-            </TextField>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </JFXTextField>
          </children>
          <padding>
             <Insets left="20.0" right="20.0" />

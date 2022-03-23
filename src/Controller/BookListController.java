@@ -30,20 +30,20 @@ public class BookListController implements Initializable {
 		authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
 		publisherColumn.setCellValueFactory(new PropertyValueFactory<>("publisher"));
 		availableColumn.setCellValueFactory(new PropertyValueFactory<>("available"));
-		books.add(new BookTable("Harry Poter", "HP101", "MK J.", "2000-02-04", true));
-		books.add(new BookTable("Harry Poter 2", "HP102", "MK J.", "2001-02-04", true));
-		books.add(new BookTable("Harry Poter 3", "HP103", "MK J.", "2002-02-04", true));
-		books.add(new BookTable("Harry Poter 4", "HP104", "MK J.", "2003-02-04", true));
-		books.add(new BookTable("Harry Poter 5", "HP105", "MK J.", "2004-02-04", true));
-		books.add(new BookTable("Harry Poter 6", "HP106", "MK J.", "2005-02-04", true));
-		books.add(new BookTable("Harry Poter 7", "HP107", "MK J.", "2006-02-04", true));
-		books.add(new BookTable("Harry Poter 8", "HP108", "MK J.", "2007-02-04", true));
-		books.add(new BookTable("Harry Poter 9", "HP109", "MK J.", "2008-02-04", true));
-		books.add(new BookTable("Harry Poter 10", "HP1010", "MK J.", "2009-02-04", true));
-		books.add(new BookTable("Harry Poter 11", "HP1011", "MK J.", "2010-02-04", true));
-		books.add(new BookTable("Harry Poter 12", "HP1012", "MK J.", "2011-02-04", true));
-		books.add(new BookTable("Harry Poter 13", "HP1013", "MK J.", "2012-02-04", true));
-		books.add(new BookTable("Harry Poter 14", "HP1014", "MK J.", "2013-02-04", true));
+		books.add(new BookTable("Harry Potter", "HP101", "MK J.", "2000-02-04", true));
+		books.add(new BookTable("Harry Potter 2", "HP102", "MK J.", "2001-02-04", true));
+		books.add(new BookTable("Harry Potter 3", "HP103", "MK J.", "2002-02-04", true));
+		books.add(new BookTable("Harry Potter 4", "HP104", "MK J.", "2003-02-04", true));
+		books.add(new BookTable("Harry Potter 5", "HP105", "MK J.", "2004-02-04", true));
+		books.add(new BookTable("Harry Potter 6", "HP106", "MK J.", "2005-02-04", true));
+		books.add(new BookTable("Harry Potter 7", "HP107", "MK J.", "2006-02-04", true));
+		books.add(new BookTable("Harry Potter 8", "HP108", "MK J.", "2007-02-04", true));
+		books.add(new BookTable("Harry Potter 9", "HP109", "MK J.", "2008-02-04", true));
+		books.add(new BookTable("Harry Potter 10", "HP1010", "MK J.", "2009-02-04", true));
+		books.add(new BookTable("Harry Potter 11", "HP1011", "MK J.", "2010-02-04", true));
+		books.add(new BookTable("Harry Potter 12", "HP1012", "MK J.", "2011-02-04", true));
+		books.add(new BookTable("Harry Potter 13", "HP1013", "MK J.", "2012-02-04", true));
+		books.add(new BookTable("Harry Potter 14", "HP1014", "MK J.", "2013-02-04", true));
 		tableView.getItems().setAll(books);
 	}
 
