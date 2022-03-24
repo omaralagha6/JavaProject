@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import Database.MemberDao;
 import Model.AlertMaker;
 import Model.Main;
 import Model.Member;
@@ -26,11 +27,12 @@ public class MemberListController implements Initializable {
     @FXML
     private TableColumn<MemberTable, String> nameColumn, idColumn, phoneNbrColumn, emailColumn, addressColumn;
     private ObservableList<MemberTable> members = FXCollections.observableArrayList();
+    private MemberDao memDAO;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-       fillTable();
+        memDAO = MemberDao.getMemDAO();
+        fillTable();
 
 
     }
@@ -42,8 +44,10 @@ public class MemberListController implements Initializable {
 
             AlertMaker.showInformationAlert("Delete Member", "Member deleted successfully");
             MemberTable temp = tableView.getSelectionModel().getSelectedItem();
-            Main.memDAO.delete(temp.getID());
-            tableView.getItems().remove(temp);
+            memDAO.delete(temp.getID());
+            members.clear();
+            fillTable();
+
 
         }
     }
@@ -57,22 +61,20 @@ public class MemberListController implements Initializable {
 
     }
 
-	void fillTable()
-	{
-		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-		idColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
-		phoneNbrColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNbr"));
-		emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
-		addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-		members.add(new MemberTable("Mohamad Houmani", "MH1999", "81789581", "mhmd@hotmail.com", "Bir el Abed"));
-		List<Member> temp = Main.memDAO.getAll();
-		for (Model.Member mem : temp) {
-			members.add(new MemberTable(mem.getName(), mem.getId(), mem.getPhoneNbr(), mem.getEmail(), mem.getAddress()));
-		}
-		tableView.getItems().setAll(members);
-	}
+    void fillTable() {
 
-
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        phoneNbrColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNbr"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
+        members.add(new MemberTable("Mohamad Houmani", "MH1999", "81789581", "mhmd@hotmail.com", "Bir el Abed"));
+        List<Member> temp = memDAO.getAll();
+        for (Model.Member mem : temp) {
+            members.add(new MemberTable(mem.getName(), mem.getId(), mem.getPhoneNbr(), mem.getEmail(), mem.getAddress()));
+        }
+        tableView.getItems().setAll(members);
+    }
 
 
 }

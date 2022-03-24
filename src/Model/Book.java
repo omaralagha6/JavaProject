@@ -1,5 +1,6 @@
 package Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,10 +10,15 @@ import javax.persistence.Table;
 public abstract class Book {
 
 	@Id
+	@Column(name="Isbn")
 	protected String isbn;
+	@Column(name="BookAuthor")
 	protected String bookAuthor;
+	@Column(name="BookName")
 	protected String bookName;
+	@Column(name="Publisher")
 	protected String publisher;
+	@Column(name="Period")
 	protected int period;
 
 	public Book(String isbn, String bookAuthor, String bookName, String publisher) {

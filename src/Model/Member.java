@@ -2,6 +2,7 @@ package Model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -30,7 +31,7 @@ public class Member extends Person {
 
 	@Override
 	public String toString() {
-		return super.toString()+", address : "+address;
+		return super.toString()+", Address : "+address;
 	}
 
 
@@ -41,5 +42,6 @@ public class Member extends Person {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	@Column(name="Address")
 	protected String address;
 }

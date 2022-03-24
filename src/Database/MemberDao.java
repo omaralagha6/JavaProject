@@ -14,8 +14,16 @@ public class MemberDao{
 
 	
 	private SessionFactory factory;
+	private static MemberDao memDAO=null;
+	public static MemberDao getMemDAO(){
+		if(memDAO==null)
+		{
+			memDAO=new MemberDao();
+		}
+		return memDAO;
+	}
 
-	public MemberDao() {
+	private MemberDao() {
 		factory =DbConnection.getSession();
 	}
 

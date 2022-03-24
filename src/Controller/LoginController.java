@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Database.EmployeeDao;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import com.jfoenix.controls.JFXButton;
@@ -46,10 +47,10 @@ public class LoginController implements Initializable {
 
 	private Preferences pref;
 	public static boolean admin = false;
+	public EmployeeDao empDAO ;
 
 	@FXML
 	private void loginAction(ActionEvent event) {
-
 		if (username.getText().isEmpty() || hiddenPass.getText().isEmpty())
 			AlertMaker.showWarningAlert(null, "Username and password are REQUIRED to login");
 		else {
@@ -79,7 +80,7 @@ public class LoginController implements Initializable {
 				}
 			} else {
 				admin = false;
-				Person p =Main.empDAO.getEmployee(username.getText(),hiddenPass.getText());
+				Person p =empDAO.getEmployee(username.getText(),hiddenPass.getText());
 				
 				
 				if (p!=null) {
@@ -107,7 +108,7 @@ public class LoginController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		empDAO=EmployeeDao.getEmployeeDao();
 	}
 
 	@FXML
@@ -116,6 +117,7 @@ public class LoginController implements Initializable {
 		{
 			String temp=hiddenPass.getText();
 			viewPass.setText(temp);
+			hiddenPass.setText(temp);
 			viewPass.setPrefWidth(583);
 			viewPass.setPrefHeight(30);
 			
@@ -129,6 +131,7 @@ public class LoginController implements Initializable {
 		else {
 			String temp = viewPass.getText();
 			hiddenPass.setText(temp);
+			viewPass.setText(temp);
 			hiddenPass.setPrefWidth(583);
 			hiddenPass.setPrefHeight(30);
 			

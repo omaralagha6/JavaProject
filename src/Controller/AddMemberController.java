@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import Database.MemberDao;
 import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,7 +24,7 @@ public class AddMemberController implements Initializable {
 	private Button saveBtn, cancelBtn;
 	@FXML
 	private VBox Adding;
-
+private MemberDao memDAO;
 	@FXML
 	public void saveCancelAction(ActionEvent event) {
 		if (event.getSource().equals(saveBtn)) {
@@ -43,7 +44,7 @@ public class AddMemberController implements Initializable {
 						Member p = new Member(name.getText(), phoneNbr.getText(), memberID.getText(),
 								email.getText(), address.getText());
 						System.out.println(p.toString());
-						Main.memDAO.add(p);
+						memDAO.add(p);
 						Stage stage = (Stage) saveBtn.getScene().getWindow();
 						stage.close();
 					}
@@ -69,5 +70,6 @@ public class AddMemberController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		memDAO=MemberDao.getMemDAO();
 	}
 }

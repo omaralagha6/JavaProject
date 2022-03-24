@@ -13,8 +13,17 @@ import Model.Person;
 public class EmployeeDao{
 
 	private SessionFactory factory;
+	private static EmployeeDao empDAO=null;
 
-	public EmployeeDao() {
+	public static EmployeeDao getEmployeeDao(){
+		if(empDAO==null)
+		{
+			empDAO=new EmployeeDao();
+		}
+		return empDAO;
+	}
+
+	private  EmployeeDao() {
 		factory =DbConnection.getSession();
 	}
 

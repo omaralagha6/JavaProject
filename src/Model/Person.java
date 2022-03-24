@@ -9,8 +9,8 @@ public abstract class Person {
 
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName() + " name=" + name + ", phoneNbr=" + phoneNbr + ", email=" + email
-				+ ", id=" + id;
+		return "Name = " + name + ", PhoneNumber = " + phoneNbr + ", Email = " + email
+				+ ", Id = " + id;
 	}
 
 	@Column(name = "Name")
