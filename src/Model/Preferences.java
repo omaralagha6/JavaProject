@@ -76,7 +76,7 @@ public class Preferences {
 
 	public static Preferences getConfigurations() {
 		Gson gson = new Gson();
-		Preferences preferences = new Preferences();
+		Model.Preferences preferences = new Preferences();
 		try {
 			preferences = gson.fromJson(new FileReader(CONFIG_FILE), Preferences.class);
 		} catch (FileNotFoundException e) {

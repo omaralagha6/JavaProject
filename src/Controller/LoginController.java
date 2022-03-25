@@ -14,10 +14,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import com.jfoenix.controls.JFXTooltip;
 
-import Model.AlertMaker;
-import Model.Main;
-import Model.Person;
-import Model.Preferences;
+import Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
