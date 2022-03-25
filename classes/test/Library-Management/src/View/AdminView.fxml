@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="742.0" stylesheets="@../Styles/darktheme.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminController">
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Current Books">
+               <content>
+                  <ListView fx:id="currBooks" editable="true" fixedCellSize="0.0" />
+               </content>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+          </Tab>
+          <Tab text="Employees">
+               <content>
+                  <ListView fx:id="employees" editable="true" fixedCellSize="0.0" />
+               </content>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#handleRefresh" text="Refresh" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+   <right>
+      <VBox alignment="TOP_CENTER" prefWidth="150.0">
+         <children>
+            <JFXButton fx:id="addEmpBtn" alignment="CENTER" contentDisplay="TOP" onAction="#addingAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="toolbar-button" text="Add Employee" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/add_mem.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="addBookBtn" alignment="CENTER" contentDisplay="TOP" onAction="#addingAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="toolbar-button" text="Add Book">
+               <graphic>
+                  <ImageView fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/add_book.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="searchBtn" alignment="CENTER" contentDisplay="TOP" onAction="#searchAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="toolbar-button" text="Search">
+               <graphic>
+                  <ImageView fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/search.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="settingsBtn" alignment="CENTER" contentDisplay="TOP" onAction="#settingsAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="toolbar-button" text="Settings">
+               <graphic>
+                  <ImageView fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/settings.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="logoutBtn" alignment="CENTER" contentDisplay="TOP" onAction="#logoutAction" prefHeight="80.0" prefWidth="150.0" ripplerFill="BLUE" styleClass="toolbar-button" text="Logout">
+               <graphic>
+                  <ImageView fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/logout.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </VBox>
+   </right>
+</BorderPane>

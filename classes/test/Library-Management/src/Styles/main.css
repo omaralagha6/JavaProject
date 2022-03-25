@@ -1,0 +1,14 @@
+#addMemberBtn:hover, #addBookBtn:hover, #viewMembersBtn:hover,
+#viewBooksBtn:hover, #settingsBtn:hover, #addEmpBtn:hover,
+#searchBtn:hover, #logoutBtn:hover {
+	-fx-background-color: rgba(121.0, 134.0, 203.0, 0.8);
+}
+
+#renewBtn:hover, #submissionBtn:hover, #issueBtn:hover {
+	-fx-background-color: #1A237E;
+}
+
+#renewBtn, #submissionBtn, #issueBtn {
+	-fx-background-color: #263238;
+	-fx-text-fill: white;
+}

@@ -1,0 +1,1 @@
+{"nbrOfDays":14,"finePerDay":2.0,"username":"admin","password":"f9527d25bf8a6da52ec9cf0355ae18ad3bee444f"}
