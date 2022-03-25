@@ -1,4 +1,5 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-/External Libraries
+/External Libraries/
+/hibernate.cfg.xml

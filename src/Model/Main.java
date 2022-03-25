@@ -17,12 +17,11 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-
+public static SessionFactory factory=null;
 	@Override
 	public void start(Stage stage) {
 		try {
-
-			SessionFactory factory=DbConnection.getSession();
+			 factory=DbConnection.getSession();
 			Parent root = FXMLLoader.load(getClass().getResource("/View/LoginView.fxml"));
 			Scene scene = new Scene(root);
 			stage.setScene(scene);

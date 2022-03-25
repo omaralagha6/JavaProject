@@ -68,7 +68,6 @@ public class MemberListController implements Initializable {
         phoneNbrColumn.setCellValueFactory(new PropertyValueFactory<>("phoneNbr"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-        members.add(new MemberTable("Mohamad Houmani", "MH1999", "81789581", "mhmd@hotmail.com", "Bir el Abed"));
         List<Member> temp = memDAO.getAll();
         for (Model.Member mem : temp) {
             members.add(new MemberTable(mem.getName(), mem.getId(), mem.getPhoneNbr(), mem.getEmail(), mem.getAddress()));

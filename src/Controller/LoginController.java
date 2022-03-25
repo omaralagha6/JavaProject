@@ -51,7 +51,8 @@ public class LoginController implements Initializable {
 
 	@FXML
 	private void loginAction(ActionEvent event) {
-		if (username.getText().isEmpty() || hiddenPass.getText().isEmpty())
+		String temp=!hiddenPass.getText().isEmpty()?hiddenPass.getText():viewPass.getText();
+		if (username.getText().isEmpty() || temp.isEmpty())
 			AlertMaker.showWarningAlert(null, "Username and password are REQUIRED to login");
 		else {
 			if (isAdmin.isSelected()) {
@@ -77,6 +78,7 @@ public class LoginController implements Initializable {
 					//AlertMaker.showWarningAlert("Attention", "Invalid username or password");
 					username.getStyleClass().add("wrong-credentials");
 					hiddenPass.getStyleClass().add("wrong-credentials");
+					viewPass.getStyleClass().add("wrong-credentials");
 				}
 			} else {
 				admin = false;
@@ -99,6 +101,7 @@ public class LoginController implements Initializable {
 					}
 				} else {
 					//AlertMaker.showWarningAlert("Attention", "Invalid username or password");
+
 					username.getStyleClass().add("wrong-credentials");
 					hiddenPass.getStyleClass().add("wrong-credentials");
 				}
@@ -117,7 +120,6 @@ public class LoginController implements Initializable {
 		{
 			String temp=hiddenPass.getText();
 			viewPass.setText(temp);
-			hiddenPass.setText(temp);
 			viewPass.setPrefWidth(583);
 			viewPass.setPrefHeight(30);
 			
@@ -131,7 +133,6 @@ public class LoginController implements Initializable {
 		else {
 			String temp = viewPass.getText();
 			hiddenPass.setText(temp);
-			viewPass.setText(temp);
 			hiddenPass.setPrefWidth(583);
 			hiddenPass.setPrefHeight(30);
 			

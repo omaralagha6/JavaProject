@@ -47,22 +47,29 @@ public class MemberDao{
 		session.beginTransaction();
 		//retrieve student based on id : primary key
 		System.out.println("Getting member with id "+id);
-		Model.Member mem= session.get(Model.Member.class,id);
-		System.out.println("Get Complete "+mem);
-		session.getTransaction().commit();
+		Model.Member mem=null;
+		try {
+			 mem = session.get(Model.Member.class, id);
+			System.out.println("Get Complete " + mem);
+			session.getTransaction().commit();
+		}catch(Exception e)
+		{
+			System.out.println("Rolled Back");
+			session.getTransaction().rollback();
+		}
 		return mem;
 	}
-	public Model.Member getPerson(String id,String phonenumber)
-	{
-		Session session=factory.getCurrentSession();
-		session.beginTransaction();
-		//retrieve student based on id : primary key
-		System.out.println("Getting student with id "+id);
-		Model.Member emp=(Model.Member) session.createQuery("from Member where Id = "+id+" and PhoneNumber = "+phonenumber);
-		System.out.println("Get Complete "+emp);
-		session.getTransaction().commit();
-		return emp;
-	}
+//	public Model.Member getPerson(String id,String phonenumber)
+//	{
+//		Session session=factory.getCurrentSession();
+//		session.beginTransaction();
+//		//retrieve student based on id : primary key
+//		System.out.println("Getting student with id "+id);
+//		Model.Member emp=(Model.Member) session.createQuery("from Member where Id = "+id+" and PhoneNumber = "+phonenumber);
+//		System.out.println("Get Complete "+emp);
+//		session.getTransaction().commit();
+//		return emp;
+//	}
 	
 	
 	public List<Model.Member>getAll() {
