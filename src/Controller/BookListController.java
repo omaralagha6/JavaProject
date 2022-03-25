@@ -3,7 +3,7 @@ package Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import Model.BookTable;
+import Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

@@ -5,6 +5,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import Model.AlertMaker;
+import com.jfoenix.controls.JFXComboBox;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,6 +25,10 @@ public class AddBookController implements Initializable {
 	private Button saveBtn, cancelBtn;
 	@FXML
 	private VBox Adding;
+	@FXML
+	private JFXComboBox<String> bookType;
+
+	ObservableList<String> typeList = FXCollections.observableArrayList("Manga", "Novel", "Comic");
 
 	@FXML
 	public void saveCancelAction(ActionEvent event) {
@@ -46,6 +53,7 @@ public class AddBookController implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		bookType.setItems(typeList);
 	}
 
 }

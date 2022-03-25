@@ -8,12 +8,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="javafx-swt" level="project" />
-    <orderEntry type="library" exported="" name="mysql-connector-java-8.0.28" level="project" />
-    <orderEntry type="library" exported="" name="antlr-2.7.7" level="project" />
-    <orderEntry type="library" exported="" name="jfoenix-9.0.10" level="project" />
     <orderEntry type="library" exported="" name="src" level="project" />
-    <orderEntry type="library" name="commons-codec-1.15" level="project" />
-    <orderEntry type="library" name="gson-2.8.9" level="project" />
+    <orderEntry type="library" exported="" name="JavaFX" level="project" />
+    <orderEntry type="library" exported="" name="Hibernate" level="project" />
+    <orderEntry type="library" exported="" name="mysql-connector-java-8.0.28" level="project" />
+    <orderEntry type="library" exported="" name="Gson, JPhoenix, Commons" level="project" />
   </component>
 </module>
