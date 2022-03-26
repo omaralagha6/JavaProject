@@ -45,6 +45,7 @@ private MemberDao memDAO;
 								email.getText(), address.getText());
 						System.out.println(p.toString());
 						memDAO.add(p);
+						MainController.refreshGraphs();
 						Stage stage = (Stage) saveBtn.getScene().getWindow();
 						stage.close();
 					}

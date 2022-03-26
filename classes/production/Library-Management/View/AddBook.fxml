@@ -21,10 +21,13 @@
                         <Insets top="10.0" />
                      </padding>
                   </JFXTextField>
-                  <JFXComboBox fx:id="bookType" focusColor="#ffff8d" labelFloat="true" promptText="Book Type">
+                  <JFXComboBox fx:id="bookType" focusColor="#ffff8d" labelFloat="true" onAction="#typeSelected" promptText="Book Type">
                      <HBox.margin>
                         <Insets top="18.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </JFXComboBox>
                </children>
             </HBox>

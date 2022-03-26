@@ -64,8 +64,10 @@ public class MainController implements Initializable {
     private Tab bookIssueTab;
 
     @FXML
-    private PieChart bookChart, memberChart;
-    private MemberDao memDAO;
+    private static PieChart bookChart;
+    @FXML
+    private static PieChart memberChart;
+    private static MemberDao memDAO;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -220,7 +222,7 @@ public class MainController implements Initializable {
         memberChart.setOpacity(op);
     }
 
-    public ObservableList<PieChart.Data> getBookStats() {
+    public static ObservableList<PieChart.Data> getBookStats() {
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
         int books = 0;
         //get number of books from DB
@@ -231,7 +233,7 @@ public class MainController implements Initializable {
         return data;
     }
 
-    public ObservableList<PieChart.Data> getMemberStats() {
+    public static ObservableList<PieChart.Data> getMemberStats() {
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
         int members = 0;
         //get number of members from DB
@@ -243,7 +245,7 @@ public class MainController implements Initializable {
         return data;
     }
 
-    private void refreshGraphs() {
+    public static void refreshGraphs() {
         bookChart.setData(getBookStats());
         memberChart.setData(getMemberStats());
     }

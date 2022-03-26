@@ -29,6 +29,7 @@ public class AddBookController implements Initializable {
 	private JFXComboBox<String> bookType;
 
 	ObservableList<String> typeList = FXCollections.observableArrayList("Manga", "Novel", "Comic");
+	private String selectedType;
 
 	@FXML
 	public void saveCancelAction(ActionEvent event) {
@@ -49,6 +50,11 @@ public class AddBookController implements Initializable {
 			Stage stage = (Stage) cancelBtn.getScene().getWindow();
 			stage.close();
 		}
+	}
+
+	@FXML
+	public void typeSelected (ActionEvent event) {
+		selectedType = bookType.getValue();
 	}
 
 	@Override
