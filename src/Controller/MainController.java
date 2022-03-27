@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import Database.BookDao;
+import Database.IssueDao;
 import Database.MemberDao;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -38,277 +40,324 @@ import javafx.stage.*;
 
 public class MainController implements Initializable {
 
-    @FXML
-    private JFXTextField searchBookID, searchMemberID, bookID;
-    @FXML
-    private Text bookTitleTXT, authorTXT, memberNameTXT, contactTXT, statusTXT;
-    @FXML
-    private Text memName, memEmail, memNumber, bookName, bookAuthor, bookPublisher, issueDate, numDays, fine;
-    @FXML
-    private JFXButton addMemberBtn, addBookBtn, viewMembersBtn, viewBooksBtn, settingsBtn, renewBtn, submissionBtn, issueBtn;
-    @FXML
-    private HBox bookInfo, memberInfo, submissionContainer;
-    @FXML
-    private ListView<BookTable> books;
-    @FXML
-    private StackPane mainPane, bookInfoContainer, memberInfoContainer;
-    @FXML
-    private AnchorPane rootAnchor;
-    @FXML
-    private MenuItem logoutMenuItem, closeMenuItem, membersMenuItem, booksMenuItem, employeesMenuItem;
-    @FXML
-    private JFXDrawer drawer;
-    @FXML
-    private JFXHamburger hamburger;
-    @FXML
-    private Tab bookIssueTab;
+	@FXML
+	private JFXTextField searchBookID, searchMemberID, bookID;
+	@FXML
+	private Text bookTitleTXT, authorTXT, memberNameTXT, contactTXT, statusTXT;
+	@FXML
+	private Text memName, memEmail, memNumber, bookName, bookAuthor, bookPublisher, issueDate, numDays, fine;
+	@FXML
+	private JFXButton addMemberBtn, addBookBtn, viewMembersBtn, viewBooksBtn, settingsBtn, renewBtn, submissionBtn,
+			issueBtn;
+	@FXML
+	private HBox bookInfo, memberInfo, submissionContainer;
+	@FXML
+	private ListView<BookTable> books;
+	@FXML
+	private StackPane mainPane, bookInfoContainer, memberInfoContainer;
+	@FXML
+	private AnchorPane rootAnchor;
+	@FXML
+	private MenuItem logoutMenuItem, closeMenuItem, membersMenuItem, booksMenuItem, employeesMenuItem;
+	@FXML
+	private JFXDrawer drawer;
+	@FXML
+	private JFXHamburger hamburger;
+	@FXML
+	private Tab bookIssueTab;
 
-    @FXML
-    private static PieChart bookChart;
-    @FXML
-    private static PieChart memberChart;
-    private static MemberDao memDAO;
+	@FXML
+	private static PieChart bookChart;
+	@FXML
+	private static PieChart memberChart;
+	private static MemberDao memDAO;
+	private static BookDao bookDAO;
+	private static IssueDao issueDAO;
+	private Model.Employee emp;
+	private Model.Member mem;
+	private Model.Book book;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        memDAO = MemberDao.getMemDAO();
-        JFXDepthManager.setDepth(bookInfo, 1);
-        JFXDepthManager.setDepth(memberInfo, 1);
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		memDAO = MemberDao.getMemDAO();
+		bookDAO = BookDao.getBookDao();
+		issueDAO = IssueDao.getIssueDao();
 
-        initDrawer();
-        initGraph();
-    }
+		JFXDepthManager.setDepth(bookInfo, 1);
+		JFXDepthManager.setDepth(memberInfo, 1);
 
-    private void initGraph() {
-        bookChart = new PieChart(getBookStats());
-        memberChart = new PieChart(getMemberStats());
-        bookInfoContainer.getChildren().add(bookChart);
-        memberInfoContainer.getChildren().add(memberChart);
+		initDrawer();
+		initGraph();
+	}
 
-        bookIssueTab.setOnSelectionChanged(new EventHandler<Event>() {
-            @Override
-            public void handle(Event event) {
-                if (bookIssueTab.isSelected()) {
-                    refreshGraphs();
-                }
-            }
-        });
-    }
+	private void initGraph() {
+		bookChart = new PieChart(getBookStats());
+		memberChart = new PieChart(getMemberStats());
+		bookInfoContainer.getChildren().add(bookChart);
+		memberInfoContainer.getChildren().add(memberChart);
 
-    private void initDrawer() {
-        try {
-            VBox toolbar = FXMLLoader.load(getClass().getResource("/View/Toolbar.fxml"));
-            drawer.setSidePane(toolbar);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        HamburgerSlideCloseTransition task = new HamburgerSlideCloseTransition(hamburger);
-        task.setRate(-1);
-        hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (Event event) -> {
+		bookIssueTab.setOnSelectionChanged(new EventHandler<Event>() {
+			@Override
+			public void handle(Event event) {
+				if (bookIssueTab.isSelected()) {
+					refreshGraphs();
+				}
+			}
+		});
+	}
 
-            task.setRate(task.getRate() * -1);
-            task.play();
-            if (drawer.isClosed()) {
-                drawer.open();
-            } else {
-                drawer.close();
-            }
-        });
-    }
+	private void initDrawer() {
+		try {
+			VBox toolbar = FXMLLoader.load(getClass().getResource("/View/Toolbar.fxml"));
+			drawer.setSidePane(toolbar);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		HamburgerSlideCloseTransition task = new HamburgerSlideCloseTransition(hamburger);
+		task.setRate(-1);
+		hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (Event event) -> {
 
-    @FXML
-    private void addingAction(ActionEvent event) {
-        if (event.getSource().equals(addMemberBtn))
-            loadWindow("/View/AddMember.fxml", "Add Member", event);
-        else
-            loadWindow("/View/AddBook.fxml", "Add Book", event);
-    }
+			task.setRate(task.getRate() * -1);
+			task.play();
+			if (drawer.isClosed()) {
+				drawer.open();
+			} else {
+				drawer.close();
+			}
+		});
+	}
 
-    @FXML
-    private void viewingAction(ActionEvent event) {
-        if (event.getSource().equals(viewMembersBtn))
-            loadWindow("/View/MemberList.fxml", "All Members", event);
-        else
-            loadWindow("/View/BookList.fxml", "All Books", event);
-    }
+	@FXML
+	private void addingAction(ActionEvent event) {
+		if (event.getSource().equals(addMemberBtn))
+			loadWindow("/View/AddMember.fxml", "Add Member", event);
+		else
+			loadWindow("/View/AddBook.fxml", "Add Book", event);
+	}
 
-    @FXML
-    private void settingsAction(ActionEvent event) {
-        loadWindow("/View/SettingsView.fxml", "Settings", event);
-    }
+	@FXML
+	private void viewingAction(ActionEvent event) {
+		if (event.getSource().equals(viewMembersBtn))
+			loadWindow("/View/MemberList.fxml", "All Members", event);
+		else
+			loadWindow("/View/BookList.fxml", "All Books", event);
+	}
 
-    @FXML
-    private void searchAction(ActionEvent event) {
-        disEnGraphs(false);
-        if (event.getSource().equals(searchBookID)) {
-            bookTitleTXT.setText("");
-            authorTXT.setText("");
-            statusTXT.setText("");
-        } else if (event.getSource().equals(searchMemberID)) {
-            memberNameTXT.setText("");
-            contactTXT.setText("");
-        }
-    }
+	@FXML
+	private void settingsAction(ActionEvent event) {
+		loadWindow("/View/SettingsView.fxml", "Settings", event);
+	}
 
-    @FXML
-    private void issueBookAction(ActionEvent event) {
+	@FXML
+	private void searchAction(ActionEvent event) {
+		book = bookDAO.get(searchBookID.getText());
+		if (book == null) {
 
-    }
+			bookTitleTXT.setVisible(false);
+			authorTXT.setVisible(false);
+			statusTXT.setVisible(false);
+			disEnGraphs(true);
+			return;
+		}
+		bookTitleTXT.setText(book.getBookName());
+		authorTXT.setText(book.getBookAuthor());
+		statusTXT.setText(book.isAvailable() ? "Yes" : "No");
+		bookTitleTXT.setVisible(true);
+		authorTXT.setVisible(true);
+		statusTXT.setVisible(true);
+		disEnGraphs(false);
 
-    @FXML
-    private void renewSubmissionAction(ActionEvent event) {
+		return;
+	}
 
-    }
+	@FXML
+	private void issueBookAction(ActionEvent event) {
+		Node node = (Node) event.getSource();
+		Stage stage = (Stage) node.getScene().getWindow();
+		// Step 2
+		emp = (Model.Employee) stage.getUserData();
+		if (book == null || mem == null) {
+			AlertMaker.showWarningAlert("Invalid Inputs", "A book and a member are needed t make this issue");
+			return;
+		}
+		if (book.isAvailable() == false) {
+			AlertMaker.showWarningAlert("Invalid Inputs", "This book can't be issued");
+			return;
+		}
 
-    @FXML
-    private void loadBookInfo(ActionEvent Event) {
-        // This is for Renew tab
-        clearLabels();
-        //if book is found
-        disEnButtons(true);
-        submissionContainer.setOpacity(1);
-        // if book isn't found
-        BoxBlur blur = new BoxBlur(3, 3, 3);
+		issueDAO.add(new Issue(book, emp, mem));
+		book.setAvailable(false);
+		bookDAO.update(book);
 
-        JFXDialogLayout dialogLayout = new JFXDialogLayout();
-        JFXButton button = new JFXButton("Okay");
-        button.getStyleClass().add("dialog-button");
+		searchBookID.setText("");
+		searchMemberID.setText("");
+		bookTitleTXT.setVisible(false);
+		authorTXT.setVisible(false);
+		statusTXT.setVisible(false);
 
-        JFXDialog dialog = new JFXDialog(mainPane, dialogLayout, JFXDialog.DialogTransition.TOP);
-        button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
-            dialog.close();
-        });
-        dialogLayout.setHeading(new Label("This book doesn't exist in the records"));
-        dialogLayout.setActions(button);
-        dialog.show();
+		memberNameTXT.setVisible(false);
+		contactTXT.setVisible(false);
+		disEnGraphs(true);
+		disEnGraphs(true);
 
-        dialog.setOnDialogClosed((JFXDialogEvent event) -> {
-            rootAnchor.setEffect(null);
-        });
+	}
 
-        rootAnchor.setEffect(blur);
-    }
+	@FXML
+	private void renewSubmissionAction(ActionEvent event) {
 
-    private void clearLabels() {
-        memName.setText("");
-        memEmail.setText("");
-        memNumber.setText("");
+	}
 
-        bookName.setText("");
-        bookAuthor.setText("");
-        bookPublisher.setText("");
+	@FXML
+	private void loadBookInfo(ActionEvent Event) {
+		// This is for Renew tab
+		clearLabels();
+		// if book is found
+		disEnButtons(true);
+		submissionContainer.setOpacity(1);
+		// if book isn't found
+		BoxBlur blur = new BoxBlur(3, 3, 3);
 
-        issueDate.setText("");
-        numDays.setText("");
-        fine.setText("");
+		JFXDialogLayout dialogLayout = new JFXDialogLayout();
+		JFXButton button = new JFXButton("Okay");
+		button.getStyleClass().add("dialog-button");
 
-        disEnButtons(false);
+		JFXDialog dialog = new JFXDialog(mainPane, dialogLayout, JFXDialog.DialogTransition.TOP);
+		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
+			dialog.close();
+		});
+		dialogLayout.setHeading(new Label("This book doesn't exist in the records"));
+		dialogLayout.setActions(button);
+		dialog.show();
 
-        submissionContainer.setOpacity(0);
-    }
+		dialog.setOnDialogClosed((JFXDialogEvent event) -> {
+			rootAnchor.setEffect(null);
+		});
 
-    private void disEnButtons(Boolean flag) {
-        // If true => buttons are enabled
+		rootAnchor.setEffect(blur);
+	}
 
-        renewBtn.setDisable(!flag);
-        submissionBtn.setDisable(!flag);
-    }
+	private void clearLabels() {
+		memName.setText("");
+		memEmail.setText("");
+		memNumber.setText("");
 
-    private void disEnGraphs(Boolean flag) {
-        // If true => graphs are enabled
-        double op=flag.toString().equals("false")?0:1;
+		bookName.setText("");
+		bookAuthor.setText("");
+		bookPublisher.setText("");
 
-        bookChart.setOpacity(op);
-        memberChart.setOpacity(op);
-    }
+		issueDate.setText("");
+		numDays.setText("");
+		fine.setText("");
 
-    public static ObservableList<PieChart.Data> getBookStats() {
-        ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
-        int books = 0;
-        //get number of books from DB
-        data.add(new PieChart.Data("Total Books (" + books + ")", books));
-        //get number of issued books from DB
-        data.add(new PieChart.Data("Issued Books (" + books + ")", books));
+		disEnButtons(false);
 
-        return data;
-    }
+		submissionContainer.setOpacity(0);
+	}
 
-    public static ObservableList<PieChart.Data> getMemberStats() {
-        ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
-        int members = 0;
-        //get number of members from DB
-        members = memDAO.getAll().size();
-        data.add(new PieChart.Data("Total Members (" + members + ")", members));
-        //get number of members with books from DB
-        data.add(new PieChart.Data("Members With Books (" + members + ")", members));
+	private void disEnButtons(Boolean flag) {
+		// If true => buttons are enabled
 
-        return data;
-    }
+		renewBtn.setDisable(!flag);
+		submissionBtn.setDisable(!flag);
+	}
 
-    public static void refreshGraphs() {
-        bookChart.setData(getBookStats());
-        memberChart.setData(getMemberStats());
-    }
+	private void disEnGraphs(Boolean flag) {
+		// If true => graphs are enabled
+		double op = flag.toString().equals("false") ? 0 : 1;
 
-    @FXML
-    void searchMemberID(ActionEvent event) {
-        Model.Member mem = memDAO.get(searchMemberID.getText());
-        if (mem == null) {
-            memberNameTXT.setVisible(false);
-            contactTXT.setVisible(false);
-            disEnGraphs(true);
-            return;
-        }
-        disEnGraphs(false);
-        memberNameTXT.setText(mem.getName());
-        contactTXT.setText(mem.getPhoneNbr());
-        memberNameTXT.setVisible(true);
-        contactTXT.setVisible(true);
+		bookChart.setOpacity(op);
+		memberChart.setOpacity(op);
+	}
 
-    }
+	public static ObservableList<PieChart.Data> getBookStats() {
+		ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+		int books = 0;
+		// get number of books from DB
+		books = bookDAO.getAll().size();
+		data.add(new PieChart.Data("Total Books (" + books + ")", books));
+		// get number of issued books from DB
+		data.add(new PieChart.Data("Issued Books (" + books + ")", books));
 
-    @FXML
-    private void MenuItemsAction(ActionEvent event) {
-        if (event.getSource().equals(logoutMenuItem)) {
-            try {
-                Parent view = FXMLLoader.load(getClass().getResource("/View/LoginView.fxml"));
-                Scene scene = new Scene(view);
-                Stage stage = (Stage) ((Node) mainPane).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                AlertMaker.showErrorAlert("Opps",
-                        "Something went wrong while logging out.\nPlease try again in a minute.");
-                ex.printStackTrace();
-            }
-        } else if (event.getSource().equals(closeMenuItem)) {
-            Optional<ButtonType> response = AlertMaker.showConfigurationAlert(null,
-                    "Are you sure you want to close the system ?");
-            if (response.get().equals(ButtonType.OK)) {
-                System.exit(0);
-            }
-        } else if (event.getSource().equals(membersMenuItem)) {
-            loadWindow("/View/MemberList.fxml", "Members", event);
-        } else if (event.getSource().equals(booksMenuItem)) {
-            loadWindow("/View/BookList.fxml", "Books", event);
-        } else if (event.getSource().equals(employeesMenuItem)) {
+		return data;
+	}
+
+	public static ObservableList<PieChart.Data> getMemberStats() {
+		ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+		int members = 0;
+		// get number of members from DB
+		members = memDAO.getAll().size();
+		data.add(new PieChart.Data("Total Members (" + members + ")", members));
+		// get number of members with books from DB
+		data.add(new PieChart.Data("Members With Books (" + members + ")", members));
+
+		return data;
+	}
+
+	public static void refreshGraphs() {
+		bookChart.setData(getBookStats());
+		memberChart.setData(getMemberStats());
+	}
+
+	@FXML
+	void searchMemberID(ActionEvent event) {
+		mem = memDAO.get(searchMemberID.getText());
+		if (mem == null) {
+			memberNameTXT.setVisible(false);
+			contactTXT.setVisible(false);
+			disEnGraphs(true);
+			return;
+		}
+		disEnGraphs(false);
+		memberNameTXT.setText(mem.getName());
+		contactTXT.setText(mem.getPhoneNbr());
+		memberNameTXT.setVisible(true);
+		contactTXT.setVisible(true);
+		return;
+
+	}
+
+	@FXML
+	private void MenuItemsAction(ActionEvent event) {
+		if (event.getSource().equals(logoutMenuItem)) {
+			try {
+				Parent view = FXMLLoader.load(getClass().getResource("/View/LoginView.fxml"));
+				Scene scene = new Scene(view);
+				Stage stage = (Stage) ((Node) mainPane).getScene().getWindow();
+				stage.setScene(scene);
+				stage.show();
+			} catch (IOException ex) {
+				AlertMaker.showErrorAlert("Opps",
+						"Something went wrong while logging out.\nPlease try again in a minute.");
+				ex.printStackTrace();
+			}
+		} else if (event.getSource().equals(closeMenuItem)) {
+			Optional<ButtonType> response = AlertMaker.showConfigurationAlert(null,
+					"Are you sure you want to close the system ?");
+			if (response.get().equals(ButtonType.OK)) {
+				System.exit(0);
+			}
+		} else if (event.getSource().equals(membersMenuItem)) {
+			loadWindow("/View/MemberList.fxml", "Members", event);
+		} else if (event.getSource().equals(booksMenuItem)) {
+			loadWindow("/View/BookList.fxml", "Books", event);
+		} else if (event.getSource().equals(employeesMenuItem)) {
 //			loadWindow("/View/EmployeeList.fxml", "Employees", event);
-        }
-    }
+		}
+	}
 
-    private void loadWindow(String location, String title, ActionEvent event) {
-        try {
-            Parent parent = FXMLLoader.load(getClass().getResource(location));
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle(title);
-            stage.setScene(new Scene(parent));
-            stage.setMinHeight(440);
-            stage.setMinWidth(615);
-            stage.show();
-        } catch (IOException e) {
-            AlertMaker.showErrorAlert("Opps",
-                    "Something went wrong while loading the page...\nPlease try again in a minute.");
-            e.printStackTrace();
-        }
-    }
+	private void loadWindow(String location, String title, ActionEvent event) {
+		try {
+			Parent parent = FXMLLoader.load(getClass().getResource(location));
+			Stage stage = new Stage(StageStyle.DECORATED);
+			stage.setTitle(title);
+			stage.setScene(new Scene(parent));
+			stage.setMinHeight(440);
+			stage.setMinWidth(615);
+			stage.show();
+		} catch (IOException e) {
+			AlertMaker.showErrorAlert("Opps",
+					"Something went wrong while loading the page...\nPlease try again in a minute.");
+			e.printStackTrace();
+		}
+	}
 }

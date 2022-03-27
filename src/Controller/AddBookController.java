@@ -3,8 +3,8 @@ package Controller;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-
-import Model.AlertMaker;
+import Database.BookDao;
+import Model.*;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,6 +30,7 @@ public class AddBookController implements Initializable {
 
 	ObservableList<String> typeList = FXCollections.observableArrayList("Manga", "Novel", "Comic");
 	private String selectedType;
+	private BookDao bookDAO=null;
 
 	@FXML
 	public void saveCancelAction(ActionEvent event) {
@@ -42,6 +43,15 @@ public class AddBookController implements Initializable {
 				if (response.get().equals(ButtonType.OK)) {
 					AlertMaker.showInformationAlert("Save Book", "Book added successfully to your list");
 					//Refresh must be after book is added to DB
+					Model.Book b =BookFactory.createBook(selectedType, bookID.getText(), bookAuthor.getText(), bookTitle.getText(), publisher.getText());
+					if(b==null) System.out.println("Empty");
+					else {
+						System.out.println(b.getClass().getSimpleName());
+						bookDAO.add(b);
+					}
+					
+
+
 					MainController.refreshGraphs();
 					Stage stage = (Stage) saveBtn.getScene().getWindow();
 					stage.close();
@@ -62,6 +72,8 @@ public class AddBookController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		bookType.setItems(typeList);
+
+		bookDAO=BookDao.getBookDao();
 	}
 
 }

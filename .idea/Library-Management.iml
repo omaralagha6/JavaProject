@@ -6,12 +6,11 @@
       <sourceFolder url="file://$MODULE_DIR$" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="13" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="src" level="project" />
-    <orderEntry type="library" exported="" name="JavaFX" level="project" />
-    <orderEntry type="library" exported="" name="Hibernate" level="project" />
-    <orderEntry type="library" exported="" name="mysql-connector-java-8.0.28" level="project" />
-    <orderEntry type="library" exported="" name="Gson, JPhoenix, Commons" level="project" />
+    <orderEntry type="library" exported="" name="Hibernate" level="application" />
+    <orderEntry type="library" exported="" name="Extra" level="application" />
+    <orderEntry type="library" exported="" name="lib" level="application" />
   </component>
 </module>

@@ -56,7 +56,7 @@ public class LoginController implements Initializable {
 				admin = true;
 				pref = Preferences.getConfigurations();
 				String user = username.getText();
-				String pass = DigestUtils.shaHex(hiddenPass.getText());
+				String pass = DigestUtils.shaHex(temp);
 				if (user.equals(pref.getUsername()) && pass.equals(pref.getPassword())) {
 					try {
 						Parent parent = FXMLLoader.load(getClass().getResource("/View/AdminView.fxml"));
@@ -86,6 +86,7 @@ public class LoginController implements Initializable {
 					try {
 						Parent parent = FXMLLoader.load(getClass().getResource("/View/MainView.fxml"));
 						Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+						stage.setUserData(p);
 						stage.setTitle("Home");
 						stage.setScene(new Scene(parent));
 						stage.setMinHeight(440);

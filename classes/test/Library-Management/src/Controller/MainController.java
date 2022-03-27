@@ -264,6 +264,7 @@ public class MainController implements Initializable {
         contactTXT.setText(mem.getPhoneNbr());
         memberNameTXT.setVisible(true);
         contactTXT.setVisible(true);
+        return;
 
     }
 

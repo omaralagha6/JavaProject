@@ -41,6 +41,8 @@ public class AddBookController implements Initializable {
 				Optional<ButtonType> response = AlertMaker.showConfigurationAlert(null, "Proceed ?");
 				if (response.get().equals(ButtonType.OK)) {
 					AlertMaker.showInformationAlert("Save Book", "Book added successfully to your list");
+					//Refresh must be after book is added to DB
+					MainController.refreshGraphs();
 					Stage stage = (Stage) saveBtn.getScene().getWindow();
 					stage.close();
 				}

@@ -1,18 +1,17 @@
 package Model;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class BookTable {
 	private SimpleStringProperty title, id, author, publisher;
-	private SimpleBooleanProperty available;
+	private SimpleStringProperty available;
 	
-	public BookTable(String title, String id, String author, String publisher, Boolean available) {
+	public BookTable(String title, String id, String author, String publisher, String available) {
 		this.title = new SimpleStringProperty(title);
 		this.id = new SimpleStringProperty(id);
 		this.author = new SimpleStringProperty(author);
 		this.publisher = new SimpleStringProperty(publisher);
-		this.available = new SimpleBooleanProperty(available);
+		this.available = new SimpleStringProperty(available);
 	}
 	
 	public String getTitle() {
@@ -27,7 +26,7 @@ public class BookTable {
 	public String getPublisher() {
 		return this.publisher.get();
 	}
-	public Boolean getAvailable() {
+	public String getAvailable() {
 		return this.available.get();
 	}
 	
@@ -44,7 +43,7 @@ public class BookTable {
 	public void setPublisher(String publisher) {
 		this.publisher.set(publisher);
 	}
-	public void setAvailable(Boolean available) {
+	public void setAvailable(String available) {
 		this.available.set(available);
 	}
 }

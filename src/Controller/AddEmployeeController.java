@@ -67,9 +67,16 @@ public class AddEmployeeController implements Initializable {
 
     @FXML
     void generateId(ActionEvent event) {
-        Random rand = new Random();
-        int nb = rand.nextInt(100);
-        String[] name = empName.getText().split(" ");
+    	 String[] name ;
+    	 Random rand = new Random();
+    	 int nb ;
+        do {
+        	
+            nb= rand.nextInt(100);
+           name= empName.getText().split(" ");
+        }
+        while(empDAO.getEmployee("" + name[0].charAt(0) + name[1].charAt(0) + nb,"")!=null);
+       
 
         employeeID.setText("" + name[0].charAt(0) + name[1].charAt(0) + nb);
     }

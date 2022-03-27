@@ -41,39 +41,34 @@ public class EmployeeDao {
     }
 
 
-    public Employee get(String id) {
-        Session session = factory.getCurrentSession();
-        session.beginTransaction();
-        //retrieve student based on id : primary key
-        System.out.println("Getting Employee with id " + id);
-        Employee emp=null;
-        try {
-             emp = session.get(Employee.class, id);
-            System.out.println("Get Complete " + emp);
-            session.getTransaction().commit();
-        }
-        catch(Exception e)
-        {
-            session.getTransaction().rollback();
-            System.out.println("Rolled Back");
-        }
-        return emp;
-    }
-
     public Employee getEmployee(String id, String pass) {
         Session session = factory.getCurrentSession();
         session.beginTransaction();
         //retrieve student based on id : primary key
         System.out.println("Getting Employee with id " + id);
         Employee emp =null;
-        try {
-             emp = (Employee) session.createQuery("from Employee where Id = '" + id + "' and password = '" + pass + "'").getSingleResult();
-            System.out.println("Get Complete " + emp);
-            session.getTransaction().commit();
+        if(pass.equals(""))
+        {
+            try {
+                emp = session.get(Employee.class, id);
+                System.out.println("Get Complete " + emp);
+                session.getTransaction().commit();
+            }
+            catch(Exception e)
+            {
+                session.getTransaction().rollback();
+                System.out.println("Rolled Back");
+            }
         }
-        catch(Exception e){
-            session.getTransaction().rollback();
-            System.out.println("Rolled Back");
+        else {
+            try {
+                emp = (Employee) session.createQuery("from Employee where Id = '" + id + "' and password = '" + pass + "'").getSingleResult();
+                System.out.println("Get Complete " + emp);
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                session.getTransaction().rollback();
+                System.out.println("Rolled Back");
+            }
         }
         return emp;
     }

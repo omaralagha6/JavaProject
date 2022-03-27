@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -16,6 +18,7 @@ import javax.persistence.Table;
 public class Issue {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected int id;
 
     public int getId() {
@@ -81,12 +84,5 @@ public class Issue {
 
     }
 
-    public Issue(Book book, Employee employee, Member member, LocalDate issueDate) {
-        super();
-        this.book = book;
-        this.employee = employee;
-        this.member = member;
-        this.issueDate = issueDate;
-    }
 
 }

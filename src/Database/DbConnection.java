@@ -25,7 +25,7 @@ private static SessionFactory factory = null;
 //    		
 //    		factory = meta.getSessionFactoryBuilder().build();
         	
-        	 factory=new Configuration().configure().addAnnotatedClass(Model.Person.class).addAnnotatedClass(Model.Employee.class).addAnnotatedClass(Model.Member.class).addAnnotatedClass(Model.Book.class).addAnnotatedClass(Model.Issue.class).buildSessionFactory();
+        	 factory=new Configuration().configure().addAnnotatedClass(Model.Person.class).addAnnotatedClass(Model.Employee.class).addAnnotatedClass(Model.Member.class).addAnnotatedClass(Model.Book.class).addAnnotatedClass(Model.Novel.class).addAnnotatedClass(Model.Comic.class).addAnnotatedClass(Model.Manga.class).addAnnotatedClass(Model.Issue.class).buildSessionFactory();
         	
     	
     }

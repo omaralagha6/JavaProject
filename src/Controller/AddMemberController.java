@@ -62,10 +62,14 @@ private MemberDao memDAO;
 
 	@FXML
 	void generateId(ActionEvent event) {
-		Random rand = new Random();
-		int nb = rand.nextInt(100);
-		String []names=name.getText().split(" ");
-
+		 String[] names ;
+    	 Random rand = new Random();
+    	 int nb ;
+        do {
+        	
+            nb= rand.nextInt(100);
+           names= this.name.getText().split(" ");
+        }while(memDAO.get(""+names[0].charAt(0)+names[1].charAt(0)+ nb)!=null);
 		memberID.setText(""+names[0].charAt(0)+names[1].charAt(0)+ nb);
 	}
 

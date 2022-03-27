@@ -2,10 +2,9 @@ package Model;
 
 import javax.persistence.*;
 
-
 @Entity
-@Table(name = "Book")
-public abstract class Book {
+@Table(name="Book")
+public class Book {
 
 	@Id
 	@Column(name="Isbn")
@@ -18,6 +17,16 @@ public abstract class Book {
 	protected String publisher;
 	@Column(name="Period")
 	protected int period;
+	@Column(name ="Available")
+	protected Boolean isAvailable;
+
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
+	}
 
 	public Book(String isbn, String bookAuthor, String bookName, String publisher) {
 
@@ -25,6 +34,7 @@ public abstract class Book {
 		this.bookAuthor = bookAuthor;
 		this.bookName = bookName;
 		this.publisher = publisher;
+		this.isAvailable=true;
 	}
 
 	public Book() {
