@@ -2,6 +2,7 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -211,29 +212,50 @@ public class MainController implements Initializable {
 	private void loadBookInfo(ActionEvent Event) {
 		// This is for Renew tab
 		clearLabels();
-		// if book is found
-		disEnButtons(true);
-		submissionContainer.setOpacity(1);
+		book = bookDAO.get(bookID.getText());
+		Issue issue = issueDAO.get(book.getIsbn());
 		// if book isn't found
-		BoxBlur blur = new BoxBlur(3, 3, 3);
+		if (issue == null) {
+			BoxBlur blur = new BoxBlur(3, 3, 3);
 
-		JFXDialogLayout dialogLayout = new JFXDialogLayout();
-		JFXButton button = new JFXButton("Okay");
-		button.getStyleClass().add("dialog-button");
+			JFXDialogLayout dialogLayout = new JFXDialogLayout();
+			JFXButton button = new JFXButton("Okay");
+			button.getStyleClass().add("dialog-button");
 
-		JFXDialog dialog = new JFXDialog(mainPane, dialogLayout, JFXDialog.DialogTransition.TOP);
-		button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
-			dialog.close();
-		});
-		dialogLayout.setHeading(new Label("This book doesn't exist in the records"));
-		dialogLayout.setActions(button);
-		dialog.show();
+			JFXDialog dialog = new JFXDialog(mainPane, dialogLayout, JFXDialog.DialogTransition.TOP);
+			button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
+				dialog.close();
+			});
+			dialogLayout.setHeading(new Label("This book doesn't exist in the records"));
+			dialogLayout.setActions(button);
+			dialog.show();
 
-		dialog.setOnDialogClosed((JFXDialogEvent event) -> {
-			rootAnchor.setEffect(null);
-		});
+			dialog.setOnDialogClosed((JFXDialogEvent event) -> {
+				rootAnchor.setEffect(null);
+			});
 
-		rootAnchor.setEffect(blur);
+			rootAnchor.setEffect(blur);
+		}
+		// if book is found
+		else {
+			Member mem = issue.getMember();
+			
+			memName.setText(mem.getName());
+			memEmail.setText(mem.getEmail());
+			memNumber.setText(mem.getNumber());
+			
+			bookName.setText(book.getBookName());
+			bookAuthor.setText(book.getBookAuthor());
+			bookPublisher.setText(book.getPublisher());
+			
+			issueDate.setText(issue.getIssueDate().toString());
+			numDays.setText((LocalDate.now().getDayOfYear() - issue.getIssueDate().getDayOfYear()) + "");
+			fine.setText("");
+			
+			disEnButtons(true);
+			submissionContainer.setOpacity(1);
+		}
+		
 	}
 
 	private void clearLabels() {
@@ -294,6 +316,7 @@ public class MainController implements Initializable {
 	}
 
 	public static void refreshGraphs() {
+		if (bookChart == null || memberChart == null) return;
 		bookChart.setData(getBookStats());
 		memberChart.setData(getMemberStats());
 	}

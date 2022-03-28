@@ -33,6 +33,18 @@ public class Member extends Person {
 	public String toString() {
 		return super.toString()+", Address : "+address;
 	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	
+	public String getNumber() {
+		return phoneNbr;
+	}
 
 
 	public String getAddress() {

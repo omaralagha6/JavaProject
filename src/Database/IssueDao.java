@@ -42,10 +42,10 @@ public class IssueDao {
 	        session.beginTransaction();
 	        //retrieve student based on id : primary key
 	        System.out.println("Getting Book with id " + id);
-	        Model.Issue emp=null;
+	        List<Model.Issue> iss=null;
 	        try {
-	            emp = session.get(Model.Issue.class, id);
-	            System.out.println("Get Complete " + emp);
+	        	iss = session.createQuery("from Issue where book_isbn = " + id).list();
+	            System.out.println("Get Complete " + iss);
 	            session.getTransaction().commit();
 	        }
 	        catch(Exception e)
@@ -53,7 +53,7 @@ public class IssueDao {
 	            session.getTransaction().rollback();
 	            System.out.println("Rolled Back");
 	        }
-	        return emp;
+	        return iss.get(0);
 	    }
 
 
