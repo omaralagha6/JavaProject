@@ -23,15 +23,15 @@ public class BookDao {
         factory = DbConnection.getSession();
     }
 
-    public void add(Model.Book person) {
+    public void add(Model.Book book) {
         Session session = factory.getCurrentSession();
         session.beginTransaction();
 
         // save the object
         System.out.println("Saving Book ...");
-        System.out.println(person);
+        System.out.println(book);
 
-        session.save(person);
+        session.save(book);
         // commit the transaction
         session.getTransaction().commit();
         System.out.println("Done !...");
@@ -43,10 +43,10 @@ public class BookDao {
         session.beginTransaction();
         //retrieve student based on id : primary key
         System.out.println("Getting Book with id " + id);
-        Model.Book emp=null;
+        Model.Book book=null;
         try {
-            emp = session.get(Model.Book.class, id);
-            System.out.println("Get Complete " + emp);
+        	book = session.get(Model.Book.class, id);
+            System.out.println("Get Complete " + book);
             session.getTransaction().commit();
         }
         catch(Exception e)
@@ -54,7 +54,7 @@ public class BookDao {
             session.getTransaction().rollback();
             System.out.println("Rolled Back");
         }
-        return emp;
+        return book;
     }
 
 
@@ -81,9 +81,9 @@ public class BookDao {
 
     public void delete(String id) {
         Session session = factory.getCurrentSession();
-        Book p = (Book) session.load(Book.class, id);
-        if (null != p) {
-            session.delete(p);
+        Book book = (Book) session.load(Book.class, id);
+        if (null != book) {
+            session.delete(book);
         }
     }
 

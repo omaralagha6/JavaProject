@@ -46,7 +46,7 @@ public class MainController implements Initializable {
 	@FXML
 	private Text bookTitleTXT, authorTXT, memberNameTXT, contactTXT, statusTXT;
 	@FXML
-	private Text memName, memEmail, memNumber, bookName, bookAuthor, bookPublisher, issueDate, numDays, fine;
+	private Text memName, memEmail, memNumber, bookName, bookAuthor, bookPublisher, issueDate, numDays, fine,nbOfRenew;
 	@FXML
 	private JFXButton addMemberBtn, addBookBtn, viewMembersBtn, viewBooksBtn, settingsBtn, renewBtn, submissionBtn,
 			issueBtn;
@@ -152,24 +152,13 @@ public class MainController implements Initializable {
 	@FXML
 	private void searchAction(ActionEvent event) {
 		book = bookDAO.get(searchBookID.getText());
-		if (book == null) {
+		mem = memDAO.get(searchMemberID.getText());
 
-			bookTitleTXT.setVisible(false);
-			authorTXT.setVisible(false);
-			statusTXT.setVisible(false);
-			disEnGraphs(true);
-			return;
-		}
-		bookTitleTXT.setText(book.getBookName());
-		authorTXT.setText(book.getBookAuthor());
-		statusTXT.setText(book.isAvailable() ? "Yes" : "No");
-		bookTitleTXT.setVisible(true);
-		authorTXT.setVisible(true);
-		statusTXT.setVisible(true);
-		disEnGraphs(false);
+		disEnGraphs(book == null, mem == null);
 
-		return;
+	
 	}
+
 
 	@FXML
 	private void issueBookAction(ActionEvent event) {
@@ -198,8 +187,8 @@ public class MainController implements Initializable {
 
 		memberNameTXT.setVisible(false);
 		contactTXT.setVisible(false);
-		disEnGraphs(true);
-		disEnGraphs(true);
+		disEnGraphs(true,true);
+		disEnGraphs(true,true);
 
 	}
 
@@ -239,23 +228,24 @@ public class MainController implements Initializable {
 		// if book is found
 		else {
 			Member mem = issue.getMember();
-			
+
 			memName.setText(mem.getName());
 			memEmail.setText(mem.getEmail());
 			memNumber.setText(mem.getNumber());
-			
+
 			bookName.setText(book.getBookName());
 			bookAuthor.setText(book.getBookAuthor());
 			bookPublisher.setText(book.getPublisher());
-			
+
 			issueDate.setText(issue.getIssueDate().toString());
 			numDays.setText((LocalDate.now().getDayOfYear() - issue.getIssueDate().getDayOfYear()) + "");
-			fine.setText("");
-			
+			fine.setText(issue.getFine() + "");
+			nbOfRenew.setText(issue.getNbRenewal()+"");
+
 			disEnButtons(true);
 			submissionContainer.setOpacity(1);
 		}
-		
+
 	}
 
 	private void clearLabels() {
@@ -270,6 +260,7 @@ public class MainController implements Initializable {
 		issueDate.setText("");
 		numDays.setText("");
 		fine.setText("");
+		nbOfRenew.setText("");
 
 		disEnButtons(false);
 
@@ -283,12 +274,35 @@ public class MainController implements Initializable {
 		submissionBtn.setDisable(!flag);
 	}
 
-	private void disEnGraphs(Boolean flag) {
+	private void disEnGraphs(Boolean flag, Boolean flag1) {
 		// If true => graphs are enabled
 		double op = flag.toString().equals("false") ? 0 : 1;
+		double op1 = flag1.toString().equals("false") ? 0 : 1;
+		if (op == 0) {
+			bookTitleTXT.setText(book.getBookName());
+			authorTXT.setText(book.getBookAuthor());
+			statusTXT.setText(book.isAvailable() ? "Yes" : "No");
+			bookTitleTXT.setVisible(true);
+			authorTXT.setVisible(true);
+			statusTXT.setVisible(true);
+		} else {
+			bookTitleTXT.setVisible(false);
+			authorTXT.setVisible(false);
+			statusTXT.setVisible(false);
+		}
+		if (op1 == 0) {
 
+			memberNameTXT.setText(mem.getName());
+			contactTXT.setText(mem.getPhoneNbr());
+			memberNameTXT.setVisible(true);
+			contactTXT.setVisible(true);
+
+		} else {
+			memberNameTXT.setVisible(false);
+			contactTXT.setVisible(false);
+		}
 		bookChart.setOpacity(op);
-		memberChart.setOpacity(op);
+		memberChart.setOpacity(op1);
 	}
 
 	public static ObservableList<PieChart.Data> getBookStats() {
@@ -316,27 +330,10 @@ public class MainController implements Initializable {
 	}
 
 	public static void refreshGraphs() {
-		if (bookChart == null || memberChart == null) return;
+		if (bookChart == null || memberChart == null)
+			return;
 		bookChart.setData(getBookStats());
 		memberChart.setData(getMemberStats());
-	}
-
-	@FXML
-	void searchMemberID(ActionEvent event) {
-		mem = memDAO.get(searchMemberID.getText());
-		if (mem == null) {
-			memberNameTXT.setVisible(false);
-			contactTXT.setVisible(false);
-			disEnGraphs(true);
-			return;
-		}
-		disEnGraphs(false);
-		memberNameTXT.setText(mem.getName());
-		contactTXT.setText(mem.getPhoneNbr());
-		memberNameTXT.setVisible(true);
-		contactTXT.setVisible(true);
-		return;
-
 	}
 
 	@FXML

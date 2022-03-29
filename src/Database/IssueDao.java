@@ -9,28 +9,28 @@ import org.hibernate.SessionFactory;
 
 public class IssueDao {
 	 private SessionFactory factory;
-	    private static IssueDao empDAO = null;
+	    private static IssueDao issDAO = null;
 
 	    public static IssueDao getIssueDao() {
-	        if (empDAO == null) {
-	            empDAO = new IssueDao();
+	        if (issDAO == null) {
+	            issDAO = new IssueDao();
 	        }
-	        return empDAO;
+	        return issDAO;
 	    }
 
 	    private IssueDao() {
 	        factory = DbConnection.getSession();
 	    }
 
-	    public void add(Model.Issue person) {
+	    public void add(Model.Issue issue) {
 	        Session session = factory.getCurrentSession();
 	        session.beginTransaction();
 
 	        // save the object
 	        System.out.println("Saving Book ...");
-	        System.out.println(person);
+	        System.out.println(issue);
 
-	        session.save(person);
+	        session.save(issue);
 	        // commit the transaction
 	        session.getTransaction().commit();
 	        System.out.println("Done !...");
@@ -42,9 +42,9 @@ public class IssueDao {
 	        session.beginTransaction();
 	        //retrieve student based on id : primary key
 	        System.out.println("Getting Book with id " + id);
-	        List<Model.Issue> iss=null;
+	       Model.Issue iss=null;
 	        try {
-	        	iss = session.createQuery("from Issue where book_isbn = " + id).list();
+	        	iss = session.get(Model.Issue.class,id);
 	            System.out.println("Get Complete " + iss);
 	            session.getTransaction().commit();
 	        }
@@ -53,7 +53,7 @@ public class IssueDao {
 	            session.getTransaction().rollback();
 	            System.out.println("Rolled Back");
 	        }
-	        return iss.get(0);
+	        return iss;
 	    }
 
 
@@ -62,19 +62,19 @@ public class IssueDao {
 	    public List<Model.Issue> getAll() {
 	        Session session = factory.getCurrentSession();
 	        session.beginTransaction();
-	        List<Model.Issue> Books = session.createQuery("from Issue").list();
+	        List<Model.Issue> Issues = session.createQuery("from Issue").list();
 	        session.getTransaction().commit();
 
-	        return Books;
+	        return Issues;
 	    }
 	    
 	    public List<Model.Issue> getAllDistinct() {
 	        Session session = factory.getCurrentSession();
 	        session.beginTransaction();
-	        List<Model.Issue> Books = session.createQuery("from Issue where").list();
+	        List<Model.Issue> Issues = session.createQuery("from Issue where").list();
 	        session.getTransaction().commit();
 
-	        return Books;
+	        return Issues;
 	    }
 
 	    public void update(Model.Issue e) {

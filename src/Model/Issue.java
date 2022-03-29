@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -15,74 +16,84 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Issue")
-public class Issue {
+public class Issue implements Serializable{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
+	@Id
+	@OneToOne
+	protected Book book;
+	@ManyToOne
+	protected Employee employee;
+	@ManyToOne
+	protected Member member;
+	@Column(name = "IssueDate")
+	protected LocalDate issueDate;
+	
+	@Column(name="NumberOfRenewal")
+	protected int nbRenewal;
+	
+	public int getNbRenewal() {
+		return nbRenewal;
+	}
 
-    public int getId() {
-        return id;
-    }
+	public void setNbRenewal(int nbRenewal) {
+		this.nbRenewal = nbRenewal;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public int getFine() {
+		return fine;
+	}
 
-    @OneToOne
-    protected Book book;
-    @ManyToOne
-    protected Employee employee;
-    @ManyToOne
-    protected Member member;
-    @Column(name = "IssueDate")
-    protected LocalDate issueDate;
+	public void setFine(int fine) {
+		this.fine = fine;
+	}
 
+	@Column(name="Fine")
+	protected int fine;
 
-    public LocalDate getIssueDate() {
-        return issueDate;
-    }
+	public LocalDate getIssueDate() {
+		return issueDate;
+	}
 
-    public void setIssueDate(LocalDate issueDate) {
-        this.issueDate = issueDate;
-    }
+	public void setIssueDate(LocalDate issueDate) {
+		this.issueDate = issueDate;
+	}
 
-    public Book getBook() {
-        return book;
-    }
+	public Book getBook() {
+		return book;
+	}
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
+	public void setBook(Book book) {
+		this.book = book;
+	}
 
-    public Employee getEmployee() {
-        return employee;
-    }
+	public Employee getEmployee() {
+		return employee;
+	}
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 
-    public Member getMember() {
-        return member;
-    }
+	public Member getMember() {
+		return member;
+	}
 
-    public void setMember(Member member) {
-        this.member = member;
-    }
+	public void setMember(Member member) {
+		this.member = member;
+	}
 
-    public Issue(Book book, Employee employee, Member member) {
+	public Issue(Book book, Employee employee, Member member) {
 
+		this.book = book;
+		this.employee = employee;
+		this.member = member;
+		this.issueDate = LocalDate.now();
+		this.nbRenewal=0;
+		this.fine=book.getClass().getSimpleName().equalsIgnoreCase("novel")?10000:book.getClass().getSimpleName().equalsIgnoreCase("manga")?5000:3000;
+	}
 
-        this.book = book;
-        this.employee = employee;
-        this.member = member;
-        this.issueDate = LocalDate.now();
-    }
+	public Issue() {
 
-    public Issue() {
-
-    }
-
+	}
 
 }

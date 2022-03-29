@@ -106,7 +106,7 @@
                                           </HBox>
                                           <HBox fx:id="memberInfo" alignment="CENTER_LEFT" prefHeight="140.0">
                                              <children>
-                                                <JFXTextField fx:id="searchMemberID" labelFloat="true" onAction="#searchMemberID" prefHeight="39.0" prefWidth="205.0" promptText="Enter Member ID">
+                                                <JFXTextField fx:id="searchMemberID" labelFloat="true" onAction="#searchAction" prefHeight="39.0" prefWidth="205.0" promptText="Enter Member ID">
                                                    <padding>
                                                       <Insets bottom="10.0" left="10.0" top="10.0" />
                                                    </padding>
@@ -225,31 +225,9 @@
                                           </HBox>
                                        </bottom>
                                        <center>
-                                          <HBox fx:id="submissionContainer" opacity="0.0" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                          <HBox fx:id="submissionContainer" opacity="0.0" prefHeight="245.0" prefWidth="780.0">
                                              <children>
-                                                <VBox prefHeight="221.0" prefWidth="220.0" styleClass="submission-container">
-                                                   <HBox.margin>
-                                                      <Insets left="30.0" right="30.0" />
-                                                   </HBox.margin>
-                                                   <children>
-                                                      <Text fx:id="memName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-text" text="Member Name" textAlignment="CENTER" wrappingWidth="200.0">
-                                                         <VBox.margin>
-                                                            <Insets top="50.0" />
-                                                         </VBox.margin>
-                                                      </Text>
-                                                      <Text fx:id="memEmail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-text" text="Member Email" textAlignment="CENTER" wrappingWidth="200.0">
-                                                         <VBox.margin>
-                                                            <Insets top="50.0" />
-                                                         </VBox.margin>
-                                                      </Text>
-                                                      <Text fx:id="memNumber" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-text" text="Member Phone Number" textAlignment="CENTER" wrappingWidth="200.0">
-                                                         <VBox.margin>
-                                                            <Insets top="50.0" />
-                                                         </VBox.margin>
-                                                      </Text>
-                                                   </children>
-                                                </VBox>
-                                                <VBox prefHeight="221.0" prefWidth="220.0" styleClass="submission-container">
+                                                <VBox styleClass="submission-container">
                                                    <HBox.margin>
                                                       <Insets left="30.0" right="30.0" />
                                                    </HBox.margin>
@@ -271,7 +249,7 @@
                                                       </Text>
                                                    </children>
                                                 </VBox>
-                                                <VBox prefHeight="221.0" prefWidth="220.0" styleClass="submission-container">
+                                                <VBox styleClass="submission-container">
                                                    <HBox.margin>
                                                       <Insets left="30.0" right="30.0" />
                                                    </HBox.margin>
@@ -287,6 +265,29 @@
                                                          </VBox.margin>
                                                       </Text>
                                                       <Text fx:id="fine" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-text" text="Fine" textAlignment="CENTER" wrappingWidth="200.0">
+                                                         <VBox.margin>
+                                                            <Insets top="50.0" />
+                                                         </VBox.margin>
+                                                      </Text>
+                                                      <Text fx:id="nbOfRenew" layoutX="10.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-text" text="Number Of renewal" textAlignment="CENTER" wrappingWidth="200.0" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox styleClass="submission-container">
+                                                   <HBox.margin>
+                                                      <Insets left="30.0" right="30.0" />
+                                                   </HBox.margin>
+                                                   <children>
+                                                      <Text fx:id="memName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-text" text="Member Name" textAlignment="CENTER" wrappingWidth="200.0">
+                                                         <VBox.margin>
+                                                            <Insets top="50.0" />
+                                                         </VBox.margin>
+                                                      </Text>
+                                                      <Text fx:id="memEmail" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-text" text="Member Email" textAlignment="CENTER" wrappingWidth="200.0">
+                                                         <VBox.margin>
+                                                            <Insets top="50.0" />
+                                                         </VBox.margin>
+                                                      </Text>
+                                                      <Text fx:id="memNumber" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-text" text="Member Phone Number" textAlignment="CENTER" wrappingWidth="200.0">
                                                          <VBox.margin>
                                                             <Insets top="50.0" />
                                                          </VBox.margin>
