@@ -74,9 +74,10 @@ public class MainController implements Initializable {
 	private static MemberDao memDAO;
 	private static BookDao bookDAO;
 	private static IssueDao issueDAO;
-	private Model.Employee emp;
+	private static Model.Employee emp;
 	private Model.Member mem;
 	private Model.Book book;
+	private Issue issue;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -128,26 +129,6 @@ public class MainController implements Initializable {
 		});
 	}
 
-	@FXML
-	private void addingAction(ActionEvent event) {
-		if (event.getSource().equals(addMemberBtn))
-			loadWindow("/View/AddMember.fxml", "Add Member", event);
-		else
-			loadWindow("/View/AddBook.fxml", "Add Book", event);
-	}
-
-	@FXML
-	private void viewingAction(ActionEvent event) {
-		if (event.getSource().equals(viewMembersBtn))
-			loadWindow("/View/MemberList.fxml", "All Members", event);
-		else
-			loadWindow("/View/BookList.fxml", "All Books", event);
-	}
-
-	@FXML
-	private void settingsAction(ActionEvent event) {
-		loadWindow("/View/SettingsView.fxml", "Settings", event);
-	}
 
 	@FXML
 	private void searchAction(ActionEvent event) {
@@ -155,8 +136,6 @@ public class MainController implements Initializable {
 		mem = memDAO.get(searchMemberID.getText());
 
 		disEnGraphs(book == null, mem == null);
-
-	
 	}
 
 
@@ -187,22 +166,42 @@ public class MainController implements Initializable {
 
 		memberNameTXT.setVisible(false);
 		contactTXT.setVisible(false);
-		disEnGraphs(true,true);
+		
+		refreshGraphs();
 		disEnGraphs(true,true);
 
 	}
 
 	@FXML
 	private void renewSubmissionAction(ActionEvent event) {
+		issue.setIssueDate(LocalDate.now());
+		issue.setNbRenewal(issue.getNbRenewal()+1);
+		issue.setFine();
+		issueDAO.update(issue);
+		
+		Member mem = issue.getMember();
 
+		memName.setText("Name: " + mem.getName());
+		memEmail.setText("Email: " + mem.getEmail());
+		memNumber.setText("Phone Number: " + mem.getNumber());
+
+		bookName.setText(book.getClass().getSimpleName() + ": " + book.getBookName());
+		bookAuthor.setText("Author: " + book.getBookAuthor());
+		bookPublisher.setText("Publisher: " + book.getPublisher());
+
+		issueDate.setText("Issue Date: " + issue.getIssueDate().toString());
+		numDays.setText((LocalDate.now().getDayOfYear() - issue.getIssueDate().getDayOfYear()) + " days since issued");
+		fine.setText("Fine: " + issue.getFine());
+		nbOfRenew.setText("Renewed " + issue.getNbRenewal()+ " times");
 	}
 
 	@FXML
 	private void loadBookInfo(ActionEvent Event) {
 		// This is for Renew tab
 		clearLabels();
+		if (bookID.getText() == "") return;
 		book = bookDAO.get(bookID.getText());
-		Issue issue = issueDAO.get(book.getIsbn());
+		issue = issueDAO.get(book.getIsbn());
 		// if book isn't found
 		if (issue == null) {
 			BoxBlur blur = new BoxBlur(3, 3, 3);
@@ -215,7 +214,7 @@ public class MainController implements Initializable {
 			button.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
 				dialog.close();
 			});
-			dialogLayout.setHeading(new Label("This book doesn't exist in the records"));
+			dialogLayout.setHeading(new Label("This book is not issued"));
 			dialogLayout.setActions(button);
 			dialog.show();
 
@@ -229,18 +228,18 @@ public class MainController implements Initializable {
 		else {
 			Member mem = issue.getMember();
 
-			memName.setText(mem.getName());
-			memEmail.setText(mem.getEmail());
-			memNumber.setText(mem.getNumber());
+			memName.setText("Name: " + mem.getName());
+			memEmail.setText("Email: " + mem.getEmail());
+			memNumber.setText("Phone Number: " + mem.getNumber());
 
-			bookName.setText(book.getBookName());
-			bookAuthor.setText(book.getBookAuthor());
-			bookPublisher.setText(book.getPublisher());
+			bookName.setText(book.getClass().getSimpleName() + ": "  + book.getBookName());
+			bookAuthor.setText("Author: " + book.getBookAuthor());
+			bookPublisher.setText("Publisher: " + book.getPublisher());
 
-			issueDate.setText(issue.getIssueDate().toString());
-			numDays.setText((LocalDate.now().getDayOfYear() - issue.getIssueDate().getDayOfYear()) + "");
-			fine.setText(issue.getFine() + "");
-			nbOfRenew.setText(issue.getNbRenewal()+"");
+			issueDate.setText("Issue Date: " + issue.getIssueDate().toString());
+			numDays.setText((LocalDate.now().getDayOfYear() - issue.getIssueDate().getDayOfYear()) + " days since issued");
+			fine.setText("Fine: " + issue.getFine());
+			nbOfRenew.setText("Renewed " + issue.getNbRenewal()+ " times");
 
 			disEnButtons(true);
 			submissionContainer.setOpacity(1);
@@ -281,7 +280,7 @@ public class MainController implements Initializable {
 		if (op == 0) {
 			bookTitleTXT.setText(book.getBookName());
 			authorTXT.setText(book.getBookAuthor());
-			statusTXT.setText(book.isAvailable() ? "Yes" : "No");
+			statusTXT.setText(book.isAvailable() ? "Available" : "Not Available");
 			bookTitleTXT.setVisible(true);
 			authorTXT.setVisible(true);
 			statusTXT.setVisible(true);
@@ -312,6 +311,7 @@ public class MainController implements Initializable {
 		books = bookDAO.getAll().size();
 		data.add(new PieChart.Data("Total Books (" + books + ")", books));
 		// get number of issued books from DB
+		books = issueDAO.getAll().size();
 		data.add(new PieChart.Data("Issued Books (" + books + ")", books));
 
 		return data;
@@ -324,6 +324,7 @@ public class MainController implements Initializable {
 		members = memDAO.getAll().size();
 		data.add(new PieChart.Data("Total Members (" + members + ")", members));
 		// get number of members with books from DB
+		members = issueDAO.getAllDistinct().size();
 		data.add(new PieChart.Data("Members With Books (" + members + ")", members));
 
 		return data;
@@ -334,6 +335,10 @@ public class MainController implements Initializable {
 			return;
 		bookChart.setData(getBookStats());
 		memberChart.setData(getMemberStats());
+	}
+	
+	public static Employee getEmp() {
+		return emp;
 	}
 
 	@FXML

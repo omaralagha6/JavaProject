@@ -14,6 +14,7 @@ import Model.AlertMaker;
 import Model.Employee;
 import Model.Main;
 import Model.Person;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -90,7 +91,38 @@ public class AddEmployeeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // TODO Auto-generated method stub
         empDAO = EmployeeDao.getEmployeeDao();
+        
+        empName.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            focusState(newValue, "name");
+        });
 
+        phoneNbr.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            focusState(newValue, "phone");
+        });
+    }
+    
+    private void focusState(boolean value, String node) {
+        if (value) {
+            System.out.println("Focus Gained");
+        }
+        else {
+            if (node == "name") {
+            	System.out.println("Focus Lost");
+                String[] name ;
+           	 	Random rand = new Random();
+           	 	int nb ;
+           	 	do {
+           	 		nb= rand.nextInt(100);
+           	 		name= empName.getText().split(" ");
+           	 	}
+           	 	while(empDAO.getEmployee("" + name[0].charAt(0) + name[1].charAt(0) + nb,"")!=null);
+
+           	 	employeeID.setText("" + name[0].charAt(0) + name[1].charAt(0) + nb);
+            }
+            else {
+            	password.setText(employeeID.getText() + "_" + phoneNbr.getText().hashCode());
+            }
+        }
     }
 
 }

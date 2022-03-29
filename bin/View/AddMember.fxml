@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../Styles/darktheme.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddMemberController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../Styles/darktheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddMemberController">
    <children>
       <VBox alignment="CENTER" prefWidth="600.0" spacing="10.0" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <JFXTextField fx:id="name" labelFloat="true" onAction="#generateId" prefHeight="50.0" promptText="Full Name">
-               <font>
-                  <Font size="16.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="10.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets top="10.0" />
-               </padding>
-            </JFXTextField>
-            <JFXTextField fx:id="memberID" editable="false" labelFloat="true" prefHeight="50.0" promptText="Member ID">
                <font>
                   <Font size="16.0" />
                </font>
@@ -56,6 +47,17 @@
                </padding>
             </JFXTextField>
             <JFXTextField fx:id="address" labelFloat="true" prefHeight="50.0" promptText="Address">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </JFXTextField>
+            <JFXTextField fx:id="memberID" editable="false" labelFloat="true" prefHeight="50.0" promptText="Member ID">
                <font>
                   <Font size="16.0" />
                </font>

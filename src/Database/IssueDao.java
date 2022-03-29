@@ -71,7 +71,7 @@ public class IssueDao {
 	    public List<Model.Issue> getAllDistinct() {
 	        Session session = factory.getCurrentSession();
 	        session.beginTransaction();
-	        List<Model.Issue> Issues = session.createQuery("from Issue where").list();
+	        List<Model.Issue> Issues = session.createQuery("select distinct I.id from Issue I").list();
 	        session.getTransaction().commit();
 
 	        return Issues;

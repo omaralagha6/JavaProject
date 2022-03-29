@@ -15,6 +15,7 @@ import com.jfoenix.controls.JFXToggleButton;
 import com.jfoenix.controls.JFXTooltip;
 
 import Model.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -110,6 +111,12 @@ public class LoginController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		empDAO=EmployeeDao.getEmployeeDao();
+		Platform.runLater(new Runnable() {
+	        @Override
+	        public void run() {
+	        	username.requestFocus();
+	        }
+	    });
 	}
 
 	@FXML

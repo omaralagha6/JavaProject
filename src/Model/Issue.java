@@ -43,8 +43,9 @@ public class Issue implements Serializable{
 		return fine;
 	}
 
-	public void setFine(int fine) {
-		this.fine = fine;
+	public void setFine() {
+		this.fine = book.getClass().getSimpleName().equalsIgnoreCase("novel")?10000:book.getClass().getSimpleName().equalsIgnoreCase("manga")?5000:3000;
+		this.fine *= nbRenewal;
 	}
 
 	@Column(name="Fine")
@@ -89,7 +90,7 @@ public class Issue implements Serializable{
 		this.member = member;
 		this.issueDate = LocalDate.now();
 		this.nbRenewal=0;
-		this.fine=book.getClass().getSimpleName().equalsIgnoreCase("novel")?10000:book.getClass().getSimpleName().equalsIgnoreCase("manga")?5000:3000;
+		this.fine=0;
 	}
 
 	public Issue() {

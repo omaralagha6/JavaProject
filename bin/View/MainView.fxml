@@ -21,11 +21,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<StackPane fx:id="mainPane" prefHeight="457.0" prefWidth="774.0" stylesheets="@../Styles/darktheme.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+<StackPane fx:id="mainPane" prefHeight="482.0" prefWidth="887.0" stylesheets="@../Styles/darktheme.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
    <children>
       <AnchorPane fx:id="rootAnchor" prefHeight="421.0" prefWidth="1000.0">
          <children>
-            <BorderPane prefHeight="416.0" prefWidth="753.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <BorderPane prefHeight="482.4" prefWidth="848.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             	<top>
             		<MenuBar BorderPane.alignment="CENTER">
             			<menus>
@@ -48,7 +48,7 @@
                <center>
                   <AnchorPane prefWidth="850.0" BorderPane.alignment="CENTER">
                      <children>
-                        <TabPane prefHeight="393.0" prefWidth="593.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TabPane prefHeight="456.8" prefWidth="697.6" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <tabs>
                               <Tab fx:id="bookIssueTab" text="Issue Book">
                                  <content>
@@ -174,9 +174,9 @@
                               </Tab>
                               <Tab text="Renew | Submission">
                                  <content>
-                                    <BorderPane>
+                                    <BorderPane prefHeight="406.0" prefWidth="783.0">
                                        <top>
-                                          <JFXTextField fx:id="bookID" labelFloat="true" onAction="#loadBookInfo" prefHeight="30.0" prefWidth="599.0" promptText="Enter ISBN" styleClass="text-field" BorderPane.alignment="CENTER">
+                                          <JFXTextField fx:id="bookID" labelFloat="true" onAction="#loadBookInfo" prefHeight="30.0" prefWidth="783.0" promptText="Enter ISBN" styleClass="text-field" BorderPane.alignment="CENTER">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -269,7 +269,10 @@
                                                             <Insets top="50.0" />
                                                          </VBox.margin>
                                                       </Text>
-                                                      <Text fx:id="nbOfRenew" layoutX="10.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-text" text="Number Of renewal" textAlignment="CENTER" wrappingWidth="200.0" />
+                                                      <Text fx:id="nbOfRenew" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="main-text" text="Number Of renewal" textAlignment="CENTER" wrappingWidth="200.0">
+                                                         <VBox.margin>
+                                                            <Insets top="50.0" />
+                                                         </VBox.margin></Text>
                                                    </children>
                                                 </VBox>
                                                 <VBox styleClass="submission-container">

@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import Database.MemberDao;
 import Model.*;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -65,16 +66,30 @@ private MemberDao memDAO;
 		 String[] names ;
     	 Random rand = new Random();
     	 int nb ;
-        do {
-        	
-            nb= rand.nextInt(100);
-           names= this.name.getText().split(" ");
-        }while(memDAO.get(""+names[0].charAt(0)+names[1].charAt(0)+ nb)!=null);
-		memberID.setText(""+names[0].charAt(0)+names[1].charAt(0)+ nb);
+    	 do {
+    		 nb= rand.nextInt(100);
+    		 names= this.name.getText().split(" ");
+    	 }while(memDAO.get(""+names[0].charAt(0)+names[1].charAt(0)+ nb)!=null);
+    	 memberID.setText(""+names[0].charAt(0)+names[1].charAt(0)+ nb);
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		memDAO=MemberDao.getMemDAO();
+		
+		name.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            focusState(newValue);
+        });
+	}
+
+	private void focusState(Boolean newValue) {
+		 String[] names ;
+    	 Random rand = new Random();
+    	 int nb ;
+    	 do {
+    		 nb= rand.nextInt(100);
+    		 names= this.name.getText().split(" ");
+    	 }while(memDAO.get(""+names[0].charAt(0)+names[1].charAt(0)+ nb)!=null);
+    	 memberID.setText(""+names[0].charAt(0)+names[1].charAt(0)+ nb);
 	}
 }

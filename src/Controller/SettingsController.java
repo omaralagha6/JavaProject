@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXPasswordField;
 
 import Model.AlertMaker;
+import Model.Employee;
 import Model.Preferences;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,14 +28,28 @@ public class SettingsController implements Initializable {
 	private Button saveBtn, cancelBtn;
 	@FXML
 	private TextField empName, employeeID, phoneNbr, email;
+	
+	private Employee emp;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		if (LoginController.admin)
+			initAdminDefaultValues();
+		else {
+			emp = MainController.getEmp();
 			initDefaultValues();
+		}
+		
 	}
 
 	private void initDefaultValues() {
+		empName.setText(emp.getName());
+		employeeID.setText(emp.getId());
+		phoneNbr.setText(emp.getPhoneNbr());
+		email.setText(emp.getEmail());
+	}
+
+	private void initAdminDefaultValues() {
 		Preferences preferences = Preferences.getConfigurations();
 		nbrOfDays.setText("" + preferences.getNbrOfDays());
 		finePerDay.setText("" + preferences.getFinePerDay());
